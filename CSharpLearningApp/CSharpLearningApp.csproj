@@ -3,8 +3,37 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\cross-circle.png" />
+    <None Remove="Resources\edit.png" />
+    <None Remove="Resources\menu-burger.png" />
+    <None Remove="Resources\settings.png" />
+    <None Remove="Resources\user-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Classes\Exceptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModalWindow\ModalWindow.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\cross-circle.png" />
+    <Resource Include="Resources\edit.png" />
+    <Resource Include="Resources\menu-burger.png" />
+    <Resource Include="Resources\settings.png" />
+    <Resource Include="Resources\user-icon.png" />
+  </ItemGroup>
 
 </Project>

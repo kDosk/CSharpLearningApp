@@ -4,9 +4,309 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpLearningApp"
+        xmlns:modal="clr-namespace:ModalWindow;assembly=ModalWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Приложение изучения языка программирования C#" MinHeight="500" MinWidth="800" Height="500" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <!--#region Window Name -->
+        <Grid Background="{StaticResource PrimaryColorBrush}">
+            <TextBlock Text="Основы программирования на C#" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlockH1}" Margin="30 0"/>
+        </Grid>
+        <!--#endregion-->
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region SlideBar Menu -->
+            <Grid x:Name="MenuGrid" Width="90" Background="{StaticResource PrimaryColorBrush}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" Margin="10">
+                    <StackPanel>
+                        <!--<ToggleButton x:Name="MenuButton" Style="{StaticResource ToggleButtonNavigationBorderless}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Resources/menu-burger.png" Stretch="Uniform" Margin="1"/>
+                                    <TextBlock Text="МЕНЮ" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" Margin="15 0"/>
+                                </StackPanel>
+                                <ToggleButton.Triggers>
+                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="ShowMenu">
+                                                <DoubleAnimation Storyboard.TargetName="MenuGrid"
+                                                                 Storyboard.TargetProperty="Width" Duration="0:0:0.5"
+                                                                 From="90" To="400"/>
+                                                <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ThemesButton"
+                                                                                Storyboard.TargetProperty="IsEnabled">
+                                                    <DiscreteBooleanKeyFrame Value="True"/>
+                                                </BooleanAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="HideMenu">
+                                                <DoubleAnimation Storyboard.TargetName="MenuGrid"
+                                                                 Storyboard.TargetProperty="Width" Duration="0:0:0.5"
+                                                                 From="400" To="90"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ToggleButton.Triggers>
+                            </ToggleButton>-->
+
+                        <ToggleButton x:Name="ThemesButton" Style="{StaticResource ToggleButtonNavigationBorderless}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Resources/menu-burger.png" Stretch="Uniform" Margin="1"/>
+                                <TextBlock Text="ТЕМЫ" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" Margin="15 0"/>
+                            </StackPanel>
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="ShowButtons">
+                                            <DoubleAnimation Storyboard.TargetName="MenuGrid"
+                                                                 Storyboard.TargetProperty="Width" Duration="0:0:0.5"
+                                                                 From="90" To="400"/>
+                                            <DoubleAnimation Storyboard.TargetName="ButtonsPanel"
+                                                                 Storyboard.TargetProperty="Height" BeginTime="0:0:0.5" Duration="0:0:0.5"
+                                                                 From="0" To="500"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="HideButtons">
+                                            <DoubleAnimation Storyboard.TargetName="MenuGrid"
+                                                                 Storyboard.TargetProperty="Width" BeginTime="0:0:0.5" Duration="0:0:0.5"
+                                                                 From="400" To="90"/>
+                                            <DoubleAnimation Storyboard.TargetName="ButtonsPanel"
+                                                                 Storyboard.TargetProperty="Height" Duration="0:0:0.5"
+                                                                 From="500" To="0"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+
+                        <!--#region Buttons Panel -->
+                        <StackPanel Orientation="Vertical" x:Name="ButtonsPanel"  Margin="15 0" Height="0">
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: С. Камиля" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Переменные и константы" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: Т. Амир" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Типы данных" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: Л. Нияз" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Арифметические вычисления" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: Г. Лилия" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Операции присваивания" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: М. Спартак" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Преобразование типов данных" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: С. Тагир" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Условные выражения" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: Г. Лилия" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Циклы" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: С. Булат" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Массивы" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: Е. Линиза" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Методы" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: С. Рустем" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Оператор return" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                            <Button Click="NavigateButton_Click" ToolTip="Ответсвенный за окно: С. Регина" Style="{StaticResource NavigationButton}">
+                                <TextBlock Text="Перечисления enum" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+                        <!--#endregion-->
+
+                        <Button x:Name="UserButton" Style="{StaticResource NavigationButton}" Click="ShowModal_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Resources/user-icon.png" Stretch="Uniform" Margin="1"/>
+                                <TextBlock Text="ПОЛЬЗОВАТЕЛЬ" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" Margin="15 0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <!--#endregion-->
+            
+            <Border Grid.Column="1" Margin="10" BorderThickness="3" BorderBrush="{StaticResource PrimaryColorBrush}" CornerRadius="20">
+                <TextBox x:Name="TBoxinfo" Background="Transparent" Foreground="#FF8FF3D7" FontSize="16" VerticalAlignment="Stretch" BorderThickness="0" IsReadOnly="True"/>
+            </Border>
+        </Grid>
+
+        <!--#region ModalWindow -->
+        <modal:ModalWindowControl x:Name="AuthModalWindow" Grid.RowSpan="2">
+            <!--#region AuthorizationPage -->
+            <Grid x:Name="AuthGrid" Grid.Column="1" VerticalAlignment="Center" Height="350" Width="350">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--#region Change auth type buttons -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <RadioButton x:Name="SignInButton" Grid.Column="0" GroupName="AuthButtons" Content="Авторизация" IsChecked="True" Style="{StaticResource ToggleButtonSingleBorder}">
+                        <RadioButton.Triggers>
+                            <EventTrigger RoutedEvent="RadioButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowSignInPage">
+                                        <DoubleAnimation Storyboard.TargetName="gridSignIn"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="0" To="1" Duration="0:0:0.15">
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="gridSignUp"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="1" To="0" Duration="0:0:0.15">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </RadioButton.Triggers>
+                    </RadioButton>
+                    <RadioButton x:Name="SignUpButton" Grid.Column="1" GroupName="AuthButtons" Content="Регистрация" Style="{StaticResource ToggleButtonSingleBorder}">
+                        <RadioButton.Triggers>
+                            <EventTrigger RoutedEvent="RadioButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowSignUpPage">
+                                        <DoubleAnimation Storyboard.TargetName="gridSignUp"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="0" To="1" Duration="0:0:0.15">
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="gridSignIn"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="1" To="0" Duration="0:0:0.15">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </RadioButton.Triggers>
+                    </RadioButton>
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region SignIn -->
+                <Grid x:Name="gridSignIn" Grid.Row="1" Opacity="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Логин:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+                        <TextBox x:Name="TBoxSignInLogin" Grid.Column="1" Margin="5" FontSize="16" VerticalAlignment="Center" Style="{StaticResource TextBoxDefault}"/>
+
+                        <TextBlock Grid.Row="1" Text="Пароль:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+                        <PasswordBox x:Name="TBoxSignInPass" Grid.Row="1" Grid.Column="1" Margin="5" FontSize="16" VerticalAlignment="Center" Style="{StaticResource PasswordBoxDefault}"/>
+                    </Grid>
+
+                    <Button Grid.Row="2" Width="120" Margin="10" HorizontalAlignment="Left" Style="{StaticResource RoundedButton}" Click="HideModal_Click">
+                        <TextBlock Text="Назад" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Button Grid.Row="2" x:Name="SignIn" Width="120" Margin="10" HorizontalAlignment="Right" Style="{StaticResource RoundedButton}" Click="SignIn_Click">
+                        <TextBlock Text="Вход" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                    </Button>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Opacity, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Opacity, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged}" Value="1">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region SignUp -->
+                <Grid x:Name="gridSignUp" Grid.Row="1" Opacity="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Фамилия:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+                        <TextBox x:Name="TBoxSignUpSurname" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
+
+                        <TextBlock Grid.Row="1" Text="Имя:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+                        <TextBox Grid.Row="1" x:Name="TBoxSignUpName" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
+
+                        <TextBlock Grid.Row="2" Text="Логин:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+                        <TextBox Grid.Row="2" x:Name="TBoxSignUpLogin" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
+
+                        <TextBlock Grid.Row="3" Text="Пароль:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+                        <PasswordBox x:Name="TBoxSignUpPass" Grid.Row="3" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource PasswordBoxDefault}"/>
+
+                        <TextBlock Grid.Row="4" Text="Повтор пароля:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+                        <PasswordBox x:Name="TBoxSignUpPassConfirm" Grid.Row="4" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource PasswordBoxDefault}"/>
+                    </Grid>
+
+                    <Button Grid.Row="1" Width="120" Margin="10" HorizontalAlignment="Left" Style="{StaticResource RoundedButton}" Click="HideModal_Click">
+                        <TextBlock Text="Назад" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Button Grid.Row="1" x:Name="SignUp" Width="120" Margin="10" HorizontalAlignment="Right" Style="{StaticResource RoundedButton}" Click="SignUp_Click">
+                        <TextBlock Text="Регистрация" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Opacity, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Opacity, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged}" Value="1">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+                <!--#endregion-->
+            </Grid>
+            <!--#endregion-->
+        </modal:ModalWindowControl>
+        <!--#endregion-->
     </Grid>
 </Window>

@@ -3,7 +3,565 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CSharpLearningApp"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+	<Application.Resources>
+		<!--#region Colors -->
+		<Color x:Key="PrimaryColor">#22355b</Color>
+		<Color x:Key="SecondaryColor">#7fabff</Color>
+		<Color x:Key="BackgroundColor">#fff</Color>
+
+		<Color x:Key="PrimaryFontColor">#fff</Color>
+		<Color x:Key="SecondaryFontColor">#f3cf3e</Color>
+		<Color x:Key="ThirdFontColor">#000</Color>
+
+		<SolidColorBrush x:Key="PrimaryColorBrush" Color="{StaticResource PrimaryColor}"></SolidColorBrush>
+		<SolidColorBrush x:Key="SecondaryColorBrush" Color="{StaticResource SecondaryColor}"></SolidColorBrush>
+		<SolidColorBrush x:Key="BackgroundColorBrush" Color="{StaticResource BackgroundColor}"></SolidColorBrush>
+
+		<SolidColorBrush x:Key="PrimaryFontColorBrush" Color="{StaticResource PrimaryFontColor}"></SolidColorBrush>
+		<SolidColorBrush x:Key="SecondaryFontColorBrush" Color="{StaticResource SecondaryFontColor}"></SolidColorBrush>
+		<SolidColorBrush x:Key="ThirdFontColorBrush" Color="{StaticResource ThirdFontColor}"></SolidColorBrush>
+		<!--#endregion-->
+
+		<!--#region Default Button Style -->
+		<Style x:Key="DefaultButton" TargetType="Button">
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="Height" Value="40"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Background" Value="{StaticResource PrimaryColorBrush}"/>
+			<Setter Property="Foreground" Value="{StaticResource PrimaryFontColorBrush}"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region Navigation Button Style -->
+		<Style x:Key="NavigationButton" TargetType="Button" BasedOn="{StaticResource DefaultButton}">
+			<Setter Property="Margin" Value="15 0"/>
+			<Setter Property="Height" Value="40"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								VerticalAlignment="{TemplateBinding VerticalAlignment}"
+								HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+								Height="{TemplateBinding Height}"
+								Width="{TemplateBinding Width}">
+							<Border.Background>
+								<SolidColorBrush x:Name="borderBackground" Color="Transparent"/>
+							</Border.Background>
+							<ContentControl Margin="{TemplateBinding Padding}"
+											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											Content="{TemplateBinding Content}">
+								<ContentControl.Foreground>
+									<SolidColorBrush x:Name="ContentColor" Color="{StaticResource PrimaryFontColor}"/>
+								</ContentControl.Foreground>
+							</ContentControl>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal"/>
+									<VisualState Name="MouseOver">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="ContentColor"
+															Storyboard.TargetProperty="Color" To="{StaticResource SecondaryFontColor}"
+															Duration="0:0:0.15"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="borderBackground"
+															Storyboard.TargetProperty="Opacity" To="0.9"
+															 Duration="0:0:0.1"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region Rounded Button -->
+		<Style x:Key="RoundedButton" TargetType="Button" BasedOn="{StaticResource DefaultButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								VerticalAlignment="{TemplateBinding VerticalAlignment}"
+								HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+								Height="{TemplateBinding Height}"
+								Width="{TemplateBinding Width}"
+                                CornerRadius="20">
+							<Border.Background>
+								<SolidColorBrush x:Name="borderBackground" Color="{StaticResource PrimaryColor}"/>
+							</Border.Background>
+							<ContentControl Margin="{TemplateBinding Padding}"
+											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											Content="{TemplateBinding Content}">
+								<ContentControl.Foreground>
+									<SolidColorBrush x:Name="ContentColor" Color="{StaticResource PrimaryFontColor}"/>
+								</ContentControl.Foreground>
+							</ContentControl>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal"/>
+									<VisualState Name="MouseOver">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="ContentColor"
+															Storyboard.TargetProperty="Color" To="{StaticResource SecondaryFontColor}"
+															Duration="0:0:0.15"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="borderBackground"
+															Storyboard.TargetProperty="Opacity" To="0.9"
+															 Duration="0:0:0.1"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region TextBlock H1 -->
+		<Style x:Key="TextBlockH1" TargetType="TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="Foreground">
+				<Setter.Value>
+					<SolidColorBrush x:Name="FontColor" Color="{StaticResource PrimaryFontColor}"/>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region TextBlock H1 Black Font -->
+		<Style x:Key="TextBlockH1BlackFont" TargetType="TextBlock" BasedOn="{StaticResource TextBlockH1}">
+			<Setter Property="Foreground" Value="{StaticResource ThirdFontColorBrush}"/>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region TextBlock Animation H1 -->
+		<Style x:Key="TextBlockH1WithAnimation" TargetType="TextBlock" BasedOn="{StaticResource TextBlockH1}">
+			<Style.Triggers>
+				<EventTrigger RoutedEvent="UIElement.MouseEnter">
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="{StaticResource SecondaryFontColor}" Duration="0:0:0.15"/>
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger>
+				<EventTrigger RoutedEvent="UIElement.MouseLeave">
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="{StaticResource PrimaryFontColor}" Duration="0:0:0.15"/>
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger>
+			</Style.Triggers>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region TextBlock H2 -->
+		<Style x:Key="TextBlockH2" TargetType="TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Foreground">
+				<Setter.Value>
+					<SolidColorBrush x:Name="FontColor" Color="{StaticResource PrimaryFontColor}"/>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region TextBlock H2 Black Font -->
+		<Style x:Key="TextBlockH2BlackFont" TargetType="TextBlock" BasedOn="{StaticResource TextBlockH2}">
+			<Setter Property="Foreground" Value="{StaticResource ThirdFontColorBrush}"/>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region TextBox -->
+		<Style x:Key="TextBoxDefault" TargetType="TextBox">
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+			<Setter Property="Height" Value="40"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Foreground" Value="{StaticResource ThirdFontColorBrush}"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="TextBox">
+						<Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="15">
+							<ScrollViewer Margin="5 0" x:Name="PART_ContentHost" SnapsToDevicePixels="True" VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"></ScrollViewer>
+							<Border.BorderBrush>
+								<SolidColorBrush x:Name="borderColor" Color="LightGray"></SolidColorBrush>
+							</Border.BorderBrush>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal"/>
+									<VisualState Name="MouseOver"/>
+									<VisualState Name="Pressed"/>
+								</VisualStateGroup>
+								<VisualStateGroup Name="FocusStates">
+									<VisualState Name="Focused">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="borderColor"
+															Storyboard.TargetProperty="Color" To="{StaticResource PrimaryColor}"
+															Duration="0:0:0.15"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Unfocused">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="borderColor"
+															Storyboard.TargetProperty="Color" To="LightGray"
+															Duration="0:0:0.15"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region PasswordBox -->
+		<Style x:Key="PasswordBoxDefault" TargetType="PasswordBox">
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+			<Setter Property="Height" Value="40"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Foreground" Value="{StaticResource ThirdFontColorBrush}"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="PasswordBox">
+						<Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="15">
+							<ScrollViewer Margin="5 0" x:Name="PART_ContentHost" SnapsToDevicePixels="True" ></ScrollViewer>
+							<Border.BorderBrush>
+								<SolidColorBrush x:Name="borderColor" Color="LightGray"></SolidColorBrush>
+							</Border.BorderBrush>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal"/>
+									<VisualState Name="MouseOver"/>
+									<VisualState Name="Pressed"/>
+								</VisualStateGroup>
+								<VisualStateGroup Name="FocusStates">
+									<VisualState Name="Focused">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="borderColor"
+															Storyboard.TargetProperty="Color" To="{StaticResource PrimaryColor}"
+															Duration="0:0:0.15"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Unfocused">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="borderColor"
+															Storyboard.TargetProperty="Color" To="LightGray"
+															Duration="0:0:0.15"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region ToggleButton Navigation Borderless -->
+		<Style x:Key="ToggleButtonNavigationBorderless" TargetType="ToggleButton">
+			<Setter Property="Margin" Value="15"/>
+			<Setter Property="Height" Value="40"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ToggleButton">
+						<Border BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								VerticalAlignment="{TemplateBinding VerticalAlignment}"
+								HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+								Height="{TemplateBinding Height}"
+								Width="{TemplateBinding Width}">
+							<Border.Background>
+								<SolidColorBrush x:Name="borderBackground" Color="Transparent"/>
+							</Border.Background>
+							<ContentControl Margin="{TemplateBinding Padding}"
+											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											Content="{TemplateBinding Content}">
+							</ContentControl>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal"/>
+									<VisualState Name="MouseOver"/>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="borderBackground"
+															Storyboard.TargetProperty="Opacity" To="0.9"
+															 Duration="0:0:0.1"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup Name="CheckStates">
+									<VisualState Name="Checked"/>
+									<VisualState Name="Unchecked"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region ToggleButton With Single Border -->
+		<Style x:Key="ToggleButtonSingleBorder" TargetType="RadioButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+			<Setter Property="Margin" Value="15"/>
+			<Setter Property="Height" Value="40"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0 0 0 3"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ToggleButton">
+						<Border BorderThickness="{TemplateBinding BorderThickness}"
+								VerticalAlignment="{TemplateBinding VerticalAlignment}"
+								HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+								Height="{TemplateBinding Height}"
+								Width="{TemplateBinding Width}">
+							<Border.Background>
+								<SolidColorBrush x:Name="borderBackground" Color="Transparent"/>
+							</Border.Background>
+							<Border.BorderBrush>
+								<SolidColorBrush x:Name="borderBrush" Color="Transparent"/>
+							</Border.BorderBrush>
+							<ContentControl Margin="{TemplateBinding Padding}"
+											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											Content="{TemplateBinding Content}">
+							</ContentControl>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal"/>
+									<VisualState Name="MouseOver"/>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="borderBackground"
+															Storyboard.TargetProperty="Opacity" To="0.9"
+															 Duration="0:0:0.1"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup Name="CheckStates">
+									<VisualState Name="Checked">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="borderBrush"
+                                                            Storyboard.TargetProperty="Color"
+                                                            From="Transparent" To="{StaticResource PrimaryColor}" Duration="0:0:0.5"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Unchecked">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="borderBrush"
+                                                            Storyboard.TargetProperty="Color"
+                                                            From="{StaticResource PrimaryColor}" To="Transparent" Duration="0:0:0.5"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<Style x:Key="ListViewDefault" TargetType="ListView">
+			<Style.Resources>
+				<Style TargetType="ListViewItem">
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="ListViewItem">
+								<ContentPresenter></ContentPresenter>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Style.Resources>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		</Style>
+
+		<Style x:Key="ListViewTestList" TargetType="ListView" BasedOn="{StaticResource ListViewDefault}">
+
+		</Style>
+
+		<Style x:Key="ListViewAnswers" TargetType="ListView" BasedOn="{StaticResource ListViewDefault}">
+
+		</Style>
+
+		<!--<Style x:Key="ButtonDesign" TargetType="Button">
+
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </Style.Resources>
+
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFDE874D" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Button.Foreground" Value="#FFFFD7C1"></Setter>
+            <Setter Property="Button.Background" Value="#FFBD6432"></Setter>
+            <Setter Property="Button.FontSize" Value="20"></Setter>
+            <Setter Property="Button.FontWeight" Value="Bold"></Setter>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="BlockDesign">
+            <Setter Property="TextBlock.Foreground" Value="#FF78FDD8"></Setter>
+            <Setter Property="TextBlock.FontSize" Value="20"></Setter>
+            <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+        </Style>
+
+        <Style TargetType="Grid" x:Key="GridDesign">
+            <Setter Property="Grid.Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF267B63"/>
+                        <GradientStop Color="#FF2F846F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="RadioButton" x:Key="RadioDesign">
+            <Setter Property="RadioButton.RenderTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RadioButton.FontWeight" Value="Bold"></Setter>
+            <Setter Property="RadioButton.Foreground" Value="#FFFFD7C1"></Setter>
+        </Style>
+
+        <Style x:Key="StackPanelDesign" TargetType="StackPanel">
+            <Setter Property="StackPanel.Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF267B63"/>
+                        <GradientStop Color="#FF32987F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="BlockDesignSmall">
+            <Setter Property="TextBlock.Foreground" Value="#FF78FDD8"></Setter>
+            <Setter Property="TextBlock.FontSize" Value="12"></Setter>
+            <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+        </Style>
+
+		-->
+		<!--#region Borderless RadioButton -->
+		<!--
+		<Style x:Key="BorderlessButton" TargetType="RadioButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0 0 0 3"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Foreground" Value="#FFFFD7C1"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ToggleButton">
+						<Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"></ContentPresenter>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="IsChecked" Value="True">
+					<Setter Property="BorderBrush" Value="{StaticResource OrangeText}"/>
+				</Trigger>
+				<Trigger Property="IsChecked" Value="False">
+					<Setter Property="BorderBrush" Value="Transparent"/>
+				</Trigger>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="Transparent"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		-->
+		<!--#endregion-->
+
+
+	</Application.Resources>
 </Application>
