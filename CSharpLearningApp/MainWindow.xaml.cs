@@ -36,7 +36,7 @@ namespace CSharpLearningApp
 			switch (currentThemeTitle)
 			{
 				case "Переменные и константы":
-                    new PageData.PageByKamilya.PageTitleData().AddData(currentThemeTitle);
+					new PageData.PageByKamilya.PageTitleData().AddData(currentThemeTitle);
                     ShowWindow(currentThemeTitle);
                     break;
 				//case "Типы данных":
