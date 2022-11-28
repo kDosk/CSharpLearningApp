@@ -16,7 +16,7 @@ namespace CSharpLearningApp.Models.UserModels
         public int TestListID { get; set; }
 
 
-        public User User { get; set; }
-        public TestList TestList { get; set; }
+        public virtual User User { get; set; }
+        public virtual TestList TestList { get; set; }
     }
 }

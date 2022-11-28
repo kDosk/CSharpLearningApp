@@ -12,9 +12,9 @@ namespace CSharpLearningApp.PageData.PageByKamilya
     public class PageTitleData : PageDataBasic
 	{
 		private readonly ApplicationContext _db;
-		public PageTitleData(ApplicationContext db)
+		public PageTitleData()
 		{
-			_db = db;
+			_db = ApplicationContext.GetContext();
 		}
 
 		public void AddData(string titleName)

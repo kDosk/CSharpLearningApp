@@ -17,7 +17,7 @@ namespace CSharpLearningApp
 		{
 			base.OnStartup(e);
 
-			MainWindow window = new MainWindow(new Classes.ApplicationContext());
+			MainWindow window = new MainWindow();
 			window.Show();
 		}
 	}

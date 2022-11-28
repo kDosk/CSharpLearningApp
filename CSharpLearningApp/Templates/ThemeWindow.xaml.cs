@@ -21,13 +21,11 @@ namespace CSharpLearningApp.Templates
     /// </summary>
     public partial class ThemeWindow : Window
     {
-        private readonly ApplicationContext _db;
-		public ThemeWindow(ApplicationContext db, string currentTitle)
+		public ThemeWindow(string currentTitle)
         {
             InitializeComponent();
-            _db = db;
 			TBlockWindowTitle.Text = currentTitle;
-            ThemeWindowMainFrame.Content = new MainPage(db, currentTitle);
+            ThemeWindowMainFrame.Content = new MainPage(currentTitle);
         }
     }
 }

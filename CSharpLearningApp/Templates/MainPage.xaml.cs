@@ -24,13 +24,10 @@ namespace CSharpLearningApp.Templates
 	/// </summary>
 	public partial class MainPage : UserControl
 	{
-		private readonly ApplicationContext _db;
-		public MainPage(ApplicationContext db, string currentTitle)
+		public MainPage(string currentTitle)
 		{
 			InitializeComponent();
-			_db = db;
-			db.Subtitles.Where(p => p.Title.Name == currentTitle).Load();
-			var list = db.Subtitles.ToList();
+			var list = ApplicationContext.GetContext().Subtitles.Where(p => p.Title.Name == currentTitle).ToList();
 			LViewTitles.ItemsSource = list;
 			
 		}

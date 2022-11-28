@@ -14,6 +14,15 @@ namespace CSharpLearningApp.Classes
 {
 	public class ApplicationContext : DbContext
 	{
+		private static ApplicationContext _context;
+
+		public static ApplicationContext GetContext()
+		{
+			if (_context == null )
+				_context = new ApplicationContext();
+			return _context;
+		}
+
 		public DbSet<Answer> Answers { get; set; } = null!;
 		public DbSet<TestQuestion> Tests { get; set; } = null!;
 		public DbSet<TestList> TestLists { get; set; } = null!;
@@ -32,7 +41,7 @@ namespace CSharpLearningApp.Classes
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlite("Data Source=testdb.db");
+			optionsBuilder.UseLazyLoadingProxies().UseSqlite("Data Source=testdb.db");
 		}
 	}
 }

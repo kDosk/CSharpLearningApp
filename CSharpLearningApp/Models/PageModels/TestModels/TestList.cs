@@ -13,8 +13,8 @@ namespace CSharpLearningApp.Models.PageModels.TestModels
         public string Title { get; set; }
         public int SubtitleID { get; set; }
 
-        public Subtitle Subtitle { get; set; }
-        public List<TestQuestion> TestQuestions { get; set; } = new List<TestQuestion>();
+        public virtual Subtitle Subtitle { get; set; }
+        public virtual List<TestQuestion> TestQuestions { get; set; } = new List<TestQuestion>();
 
     }
 }

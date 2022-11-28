@@ -25,12 +25,9 @@ namespace CSharpLearningApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ApplicationContext _db;
-        public MainWindow(ApplicationContext db)
+        public MainWindow()
         {
             InitializeComponent();
-            _db = db;
-            
         }
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -39,7 +36,7 @@ namespace CSharpLearningApp
 			switch (currentThemeTitle)
 			{
 				case "Переменные и константы":
-                    new PageData.PageByKamilya.PageTitleData(_db).AddData(currentThemeTitle);
+                    new PageData.PageByKamilya.PageTitleData().AddData(currentThemeTitle);
                     ShowWindow(currentThemeTitle);
                     break;
 				//case "Типы данных":
@@ -78,13 +75,9 @@ namespace CSharpLearningApp
 			}
 		}
 
-        /// <summary>
-        /// Метод открытия окна
-        /// </summary>
-        /// <param name="currentWindow">Название окна</param>
         private void ShowWindow(string currentTitle)
         {
-            ThemeWindow window = new ThemeWindow(_db, currentTitle);
+            ThemeWindow window = new ThemeWindow(currentTitle);
 			window.ShowDialog();
         }
 

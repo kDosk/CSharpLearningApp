@@ -15,8 +15,8 @@ namespace CSharpLearningApp.Models.PageModels
         public int TitleID { get; set; }
 
 
-        public Title Title { get; set; }
-        public Theory Theory { get; set; }
-        public TestList TestList { get; set; }
+        public virtual Title Title { get; set; }
+        public virtual Theory Theory { get; set; }
+        public virtual TestList TestList { get; set; }
     }
 }
