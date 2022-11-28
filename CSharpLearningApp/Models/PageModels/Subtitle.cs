@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CSharpLearningApp.Models.PageModels
 {
-    internal class Subtitle
+	public class Subtitle
     {
         public int ID { get; set; }
         public string Name { get; set; }

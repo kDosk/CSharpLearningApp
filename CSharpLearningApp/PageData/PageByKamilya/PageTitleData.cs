@@ -9,33 +9,32 @@ using System.Threading.Tasks;
 
 namespace CSharpLearningApp.PageData.PageByKamilya
 {
-    internal class PageCreateData : PageDataBasic
+    public class PageTitleData : PageDataBasic
 	{
 		private readonly ApplicationContext _db;
-		public PageCreateData(ApplicationContext db)
+		public PageTitleData(ApplicationContext db)
 		{
 			_db = db;
-			CreatePageData("123");
 		}
 
-		private void CreatePageData(string name)
+		public void AddData(string titleName)
 		{
-			if (!_db.Titles.ToList().Exists(p => p.Name == name))
+			if (!_db.Titles.ToList().Exists(p => p.Name == titleName))
 			{
-				Title title = new Title
-				{
-					Name = name
-				};
+				Title title = new Title { Name = titleName }; // Create title
 
+				#region Create Practice
 				Practice practice = new Practice
 				{
 					Task = "Задача",
 					CorrectAnswer = "Правильный ответ",
 					Title = title
-				};
+				}; 
+				#endregion
 
-				title.Practice = practice;
+				title.Practice = practice; // Add practice to title
 
+				#region Add subtitles to title
 				title.Subtitles.AddRange(new List<Subtitle>
 				{
 					Subtitle_1("Глава 1. Переменные",
@@ -44,13 +43,15 @@ namespace CSharpLearningApp.PageData.PageByKamilya
 					Subtitle_2("Глава 2. Константы",
 							   "Теория",
 							   title)
-				});
+				}); 
+				#endregion
 
-				_db.Titles.Add(title);
+				_db.Titles.Add(title); // Add created title to db
 				_db.SaveChanges();
 			}
 		}
 
+		#region Subtitles
 		private Subtitle Subtitle_1(string name, string theoryContent, Title title)
 		{
 			Subtitle subtitle = AddSubtitle(name, theoryContent, title);
@@ -86,7 +87,9 @@ namespace CSharpLearningApp.PageData.PageByKamilya
 
 			return subtitle;
 		}
+		#endregion
 
+		#region TestLists
 		private TestList TestList_1(Subtitle subtitle)
 		{
 			TestList testList = CreateTestList("Переменные: Тест", subtitle);
@@ -141,6 +144,7 @@ namespace CSharpLearningApp.PageData.PageByKamilya
 													  testList));
 
 			return testList;
-		}
+		} 
+		#endregion
 	}
 }

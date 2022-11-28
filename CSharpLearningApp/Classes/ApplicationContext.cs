@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace CSharpLearningApp.Classes
 {
-	internal class ApplicationContext : DbContext
+	public class ApplicationContext : DbContext
 	{
 		public DbSet<Answer> Answers { get; set; } = null!;
 		public DbSet<TestQuestion> Tests { get; set; } = null!;

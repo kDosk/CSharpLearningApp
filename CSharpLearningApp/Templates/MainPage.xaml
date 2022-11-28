@@ -10,8 +10,8 @@
     <ScrollViewer VerticalScrollBarVisibility="Hidden">
 		<StackPanel Orientation="Vertical" Margin="10">
 
-			<ListView x:Name="LViewTitles" Style="{StaticResource ListViewDefault}">
-				
+			<ListView x:Name="LViewTitles" Style="{StaticResource ListViewDefault}" >
+
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="3" CornerRadius="20" Width="500" Margin="15" VerticalAlignment="Center" Background="Gray">
@@ -31,11 +31,39 @@
 										<TextBlock Text="Тест" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
 									</Button>
 								</StackPanel>
+								<StackPanel Grid.Row="1">
+									<Button Style="{StaticResource NavigationButton}" Margin="30 0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+										<TextBlock Text="Теория" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+									</Button>
+									<Button Style="{StaticResource NavigationButton}" Margin="30 0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+										<TextBlock Text="Тест" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+									</Button>
+								</StackPanel>
+								<StackPanel Grid.Row="1">
+									<Button Style="{StaticResource NavigationButton}" Margin="30 0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+										<TextBlock Text="Теория" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+									</Button>
+									<Button Style="{StaticResource NavigationButton}" Margin="30 0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+										<TextBlock Text="Тест" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+									</Button>
+								</StackPanel>
 							</Grid>
 						</Border>
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
+			<Button Margin="30 0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+				<TextBlock Text="Практическое задание" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+				<Button.Style>
+					<Style TargetType="Button" BasedOn="{StaticResource NavigationButton}">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding Practice}" Value="{x:Null}">
+								<Setter Property="Visibility" Value="Collapsed"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
 		</StackPanel>
 	</ScrollViewer>
 </UserControl>

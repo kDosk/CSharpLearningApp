@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSharpLearningApp.Models.PageModels
 {
-    internal class Title
+	public class Title
     {
         public int ID { get; set; }
         public string Name { get; set; }

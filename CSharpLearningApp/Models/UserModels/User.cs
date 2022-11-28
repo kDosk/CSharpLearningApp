@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSharpLearningApp.Models.UserModels
 {
-    internal class User
+	public class User
     {
         public int ID { get; set; }
         public string Surname { get; set; }

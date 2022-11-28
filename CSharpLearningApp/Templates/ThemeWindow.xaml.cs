@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSharpLearningApp.Classes;
+using CSharpLearningApp.PageData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +21,13 @@ namespace CSharpLearningApp.Templates
     /// </summary>
     public partial class ThemeWindow : Window
     {
-        public ThemeWindow()
+        private readonly ApplicationContext _db;
+		public ThemeWindow(ApplicationContext db, string currentTitle)
         {
             InitializeComponent();
-            ThemeWindowMainFrame.Content = new MainPage();
+            _db = db;
+			TBlockWindowTitle.Text = currentTitle;
+            ThemeWindowMainFrame.Content = new MainPage(db, currentTitle);
         }
     }
 }

@@ -13,7 +13,7 @@
 		</Grid.RowDefinitions>
 
 		<Grid Background="{StaticResource PrimaryColorBrush}">
-			<TextBlock Style="{StaticResource TextBlockH1}" Text="Theme name" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32"/>
+			<TextBlock x:Name="TBlockWindowTitle" Style="{StaticResource TextBlockH1}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32"/>
 		</Grid>
 		
 		<ContentPresenter x:Name="ThemeWindowMainFrame" Grid.Row="1"/>

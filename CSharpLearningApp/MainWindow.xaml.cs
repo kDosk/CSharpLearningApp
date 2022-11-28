@@ -1,5 +1,8 @@
-﻿using CSharpLearningApp.Classes.MessageService;
+﻿using CSharpLearningApp.Classes;
+using CSharpLearningApp.Classes.MessageService;
 using CSharpLearningApp.Models;
+using CSharpLearningApp.PageData;
+using CSharpLearningApp.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,49 +25,53 @@ namespace CSharpLearningApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly ApplicationContext _db;
+        public MainWindow(ApplicationContext db)
         {
             InitializeComponent();
+            _db = db;
             
         }
         private void NavigateButton_Click(object sender, RoutedEventArgs e)
         {
+            var currentThemeTitle = ((sender as Button).Content as TextBlock).Text;
 			//Переход к окну по названию нажатой кнопки
-			switch ((sender as Button).Content)
+			switch (currentThemeTitle)
 			{
 				case "Переменные и константы":
-					ShowWindow(new Window());
-					break;
-				case "Типы данных":
-					ShowWindow(new Window());
-					break;
-				case "Арифметические вычисления":
-					ShowWindow(new Window());
-					break;
-				case "Операции присваивания":
-					ShowWindow(new Window());
-					break;
-				case "Преобразование базовых типов данных":
-					ShowWindow(new Window());
-					break;
-				case "Условные выражения":
-					ShowWindow(new Window());
-					break;
-				case "Циклы":
-					ShowWindow(new Window());
-					break;
-				case "Массивы":
-					ShowWindow(new Window());
-					break;
-				case "Методы":
-					ShowWindow(new Window());
-					break;
-				case "Оператор return":
-					ShowWindow(new Window());
-					break;
-				case "Перечисления enum":
-					ShowWindow(new Window());
-					break;
+                    new PageData.PageByKamilya.PageTitleData(_db).AddData(currentThemeTitle);
+                    ShowWindow(currentThemeTitle);
+                    break;
+				//case "Типы данных":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Арифметические вычисления":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Операции присваивания":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Преобразование базовых типов данных":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Условные выражения":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Циклы":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Массивы":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Методы":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Оператор return":
+				//	ShowWindow(new Window());
+				//	break;
+				//case "Перечисления enum":
+				//	ShowWindow(new Window());
+				//	break;
 				default:
 					MessageBox.Show("Ошибка выполнения.");
 					break;
@@ -75,17 +82,22 @@ namespace CSharpLearningApp
         /// Метод открытия окна
         /// </summary>
         /// <param name="currentWindow">Название окна</param>
-        private void ShowWindow(Window currentWindow)
+        private void ShowWindow(string currentTitle)
         {
-            currentWindow.ShowDialog();
+            ThemeWindow window = new ThemeWindow(_db, currentTitle);
+			window.ShowDialog();
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
 
         }
+		private void SignIn_Click(object sender, RoutedEventArgs e)
+		{
 
-        private void SignInButton_Checked(object sender, RoutedEventArgs e)
+		}
+
+		private void SignInButton_Checked(object sender, RoutedEventArgs e)
         {
             gridSignIn.Visibility = Visibility.Visible;
             gridSignUp.Visibility = Visibility.Hidden;
@@ -97,11 +109,9 @@ namespace CSharpLearningApp
             gridSignIn.Visibility = Visibility.Hidden;
         }
 
-        private void SignIn_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
+        #region Show/Hide modal window
         private void ShowModal_Click(object sender, RoutedEventArgs e)
         {
             ShowModal();
@@ -119,6 +129,7 @@ namespace CSharpLearningApp
         private void HideModal()
         {
             AuthModalWindow.IsOpen = false;
-        }
+        } 
+        #endregion
     }
 }

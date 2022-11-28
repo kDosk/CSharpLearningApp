@@ -8,7 +8,7 @@ using CSharpLearningApp.Models.PageModels.TestModels;
 
 namespace CSharpLearningApp.Models.UserModels
 {
-    internal class UserTestList
+	public class UserTestList
     {
         public int ID { get; set; }
         public int UserID { get; set; }

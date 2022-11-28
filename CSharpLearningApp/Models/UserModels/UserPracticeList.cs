@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CSharpLearningApp.Models.UserModels
 {
-    internal class UserPracticeList
+	public class UserPracticeList
     {
         public int ID { get; set; }
         public int UserID { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CSharpLearningApp.PageData
 {
-    internal class PageDataBasic
+    public class PageDataBasic
     {
         protected TestQuestion CreateQuestion(string question, string[] answers, string correctAnswer, TestList testList)
         {
