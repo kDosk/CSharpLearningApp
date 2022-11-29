@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpLearningApp.Classes;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,7 +17,7 @@ namespace CSharpLearningApp
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
-
+			ApplicationContext.GetContext();
 			MainWindow window = new MainWindow();
 			window.Show();
 		}

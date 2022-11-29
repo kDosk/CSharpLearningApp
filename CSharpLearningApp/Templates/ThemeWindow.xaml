@@ -13,10 +13,13 @@
 		</Grid.RowDefinitions>
 
 		<Grid Background="{StaticResource PrimaryColorBrush}">
+			<Button Click="ButtonCloseWindow_Click" Style="{StaticResource NavigationButton}" Margin="15 0" Width="150" HorizontalAlignment="Left">
+				<TextBlock Text="На главную" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+			</Button>
 			<TextBlock x:Name="TBlockWindowTitle" Style="{StaticResource TextBlockH1}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32"/>
 		</Grid>
 		
-		<ContentPresenter x:Name="ThemeWindowMainFrame" Grid.Row="1"/>
+		<Frame x:Name="ThemeWindowMainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
 
 	</Grid>
 </Window>

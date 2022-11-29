@@ -143,16 +143,15 @@
 			<Setter Property="TextWrapping" Value="Wrap"/>
 			<Setter Property="FontWeight" Value="Bold"/>
 			<Setter Property="FontSize" Value="18"/>
-			<Setter Property="Foreground">
-				<Setter.Value>
-					<SolidColorBrush x:Name="FontColor" Color="{StaticResource PrimaryFontColor}"/>
-				</Setter.Value>
-			</Setter>
+			<Setter Property="Foreground" Value="{StaticResource PrimaryFontColorBrush}"/>
 		</Style>
 		<!--#endregion-->
 
 		<!--#region TextBlock H1 Black Font -->
-		<Style x:Key="TextBlockH1BlackFont" TargetType="TextBlock" BasedOn="{StaticResource TextBlockH1}">
+		<Style x:Key="TextBlockH1BlackFont" TargetType="TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontSize" Value="18"/>
 			<Setter Property="Foreground" Value="{StaticResource ThirdFontColorBrush}"/>
 		</Style>
 		<!--#endregion-->
@@ -178,21 +177,41 @@
 		</Style>
 		<!--#endregion-->
 
+		<!--#region TextBlock Black Font Animation H1 -->
+		<Style x:Key="TextBlockH1BlackFontWithAnimation" TargetType="TextBlock" BasedOn="{StaticResource TextBlockH1BlackFont}">
+			<Style.Triggers>
+				<EventTrigger RoutedEvent="UIElement.MouseEnter">
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="{StaticResource SecondaryFontColor}" Duration="0:0:0.15"/>
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger>
+				<EventTrigger RoutedEvent="UIElement.MouseLeave">
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="{StaticResource ThirdFontColor}" Duration="0:0:0.15"/>
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger>
+			</Style.Triggers>
+		</Style>
+		<!--#endregion-->
+
 		<!--#region TextBlock H2 -->
 		<Style x:Key="TextBlockH2" TargetType="TextBlock">
 			<Setter Property="TextWrapping" Value="Wrap"/>
 			<Setter Property="FontWeight" Value="Bold"/>
 			<Setter Property="FontSize" Value="14"/>
-			<Setter Property="Foreground">
-				<Setter.Value>
-					<SolidColorBrush x:Name="FontColor" Color="{StaticResource PrimaryFontColor}"/>
-				</Setter.Value>
-			</Setter>
+			<Setter Property="Foreground" Value="{StaticResource PrimaryFontColorBrush}"/>
 		</Style>
 		<!--#endregion-->
 
 		<!--#region TextBlock H2 Black Font -->
-		<Style x:Key="TextBlockH2BlackFont" TargetType="TextBlock" BasedOn="{StaticResource TextBlockH2}">
+		<Style x:Key="TextBlockH2BlackFont" TargetType="TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontSize" Value="14"/>
 			<Setter Property="Foreground" Value="{StaticResource ThirdFontColorBrush}"/>
 		</Style>
 		<!--#endregion-->
@@ -421,6 +440,7 @@
 		</Style>
 		<!--#endregion-->
 
+		<!--#region ListView Default -->
 		<Style x:Key="ListViewDefault" TargetType="ListView">
 			<Style.Resources>
 				<Style TargetType="ListViewItem">
@@ -436,131 +456,129 @@
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="BorderBrush" Value="Transparent"/>
 			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
 			<Setter Property="HorizontalAlignment" Value="Stretch"/>
 		</Style>
+		<!--#endregion-->
 
-		<Style x:Key="ListViewTestList" TargetType="ListView" BasedOn="{StaticResource ListViewDefault}">
-
-		</Style>
-
-		<Style x:Key="ListViewAnswers" TargetType="ListView" BasedOn="{StaticResource ListViewDefault}">
-
-		</Style>
-
-		<!--<Style x:Key="ButtonDesign" TargetType="Button">
-
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15" />
-                </Style>
-            </Style.Resources>
-
-            <Setter Property="Background" Value="LightBlue" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="Border" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FFDE874D" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Button.Foreground" Value="#FFFFD7C1"></Setter>
-            <Setter Property="Button.Background" Value="#FFBD6432"></Setter>
-            <Setter Property="Button.FontSize" Value="20"></Setter>
-            <Setter Property="Button.FontWeight" Value="Bold"></Setter>
-        </Style>
-
-        <Style TargetType="TextBlock" x:Key="BlockDesign">
-            <Setter Property="TextBlock.Foreground" Value="#FF78FDD8"></Setter>
-            <Setter Property="TextBlock.FontSize" Value="20"></Setter>
-            <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
-        </Style>
-
-        <Style TargetType="Grid" x:Key="GridDesign">
-            <Setter Property="Grid.Background">
-                <Setter.Value>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF267B63"/>
-                        <GradientStop Color="#FF2F846F" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="RadioButton" x:Key="RadioDesign">
-            <Setter Property="RadioButton.RenderTransform">
-                <Setter.Value>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="RadioButton.FontWeight" Value="Bold"></Setter>
-            <Setter Property="RadioButton.Foreground" Value="#FFFFD7C1"></Setter>
-        </Style>
-
-        <Style x:Key="StackPanelDesign" TargetType="StackPanel">
-            <Setter Property="StackPanel.Background">
-                <Setter.Value>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF267B63"/>
-                        <GradientStop Color="#FF32987F" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="TextBlock" x:Key="BlockDesignSmall">
-            <Setter Property="TextBlock.Foreground" Value="#FF78FDD8"></Setter>
-            <Setter Property="TextBlock.FontSize" Value="12"></Setter>
-            <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
-        </Style>
-
-		-->
-		<!--#region Borderless RadioButton -->
-		<!--
-		<Style x:Key="BorderlessButton" TargetType="RadioButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+		<!--#region RadioButton Default -->
+		<Style x:Key="RadioButtonAnswers" TargetType="RadioButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+			<Setter Property="Margin" Value="0 5"/>
+			<Setter Property="Padding" Value="0 10"/>
+			<Setter Property="Height" Value="auto"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
 			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="BorderThickness" Value="0 0 0 3"/>
-			<Setter Property="Margin" Value="5"/>
-			<Setter Property="Foreground" Value="#FFFFD7C1"/>
-			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="3"/>
 			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="FontWeight" Value="Bold"/>
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="ToggleButton">
-						<Border BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}"
-                                SnapsToDevicePixels="True">
-							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3"></ContentPresenter>
+						<Border BorderThickness="{TemplateBinding BorderThickness}"
+								VerticalAlignment="{TemplateBinding VerticalAlignment}"
+								HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+								Height="{TemplateBinding Height}"
+								Width="{TemplateBinding Width}"
+								CornerRadius="20">
+							<Border.Background>
+								<SolidColorBrush x:Name="borderBackground" Color="Transparent"/>
+							</Border.Background>
+							<Border.BorderBrush>
+								<SolidColorBrush x:Name="borderBrush" Color="{StaticResource SecondaryFontColor}"/>
+							</Border.BorderBrush>
+							<ContentControl Margin="{TemplateBinding Padding}"
+											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											Content="{TemplateBinding Content}">
+							</ContentControl>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal"/>
+									<VisualState Name="MouseOver"/>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="borderBackground"
+															Storyboard.TargetProperty="Opacity" To="0.9"
+															 Duration="0:0:0.1"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup Name="CheckStates">
+									<VisualState Name="Checked">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="borderBrush"
+                                                            Storyboard.TargetProperty="Color"
+                                                            From="Transparent" To="{StaticResource SecondaryFontColor}" Duration="0:0:0.5"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Unchecked">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="borderBrush"
+                                                            Storyboard.TargetProperty="Color"
+                                                            From="{StaticResource SecondaryFontColor}" To="Transparent" Duration="0:0:0.5"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
 						</Border>
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
-			<Style.Triggers>
-				<Trigger Property="IsChecked" Value="True">
-					<Setter Property="BorderBrush" Value="{StaticResource OrangeText}"/>
-				</Trigger>
-				<Trigger Property="IsChecked" Value="False">
-					<Setter Property="BorderBrush" Value="Transparent"/>
-				</Trigger>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="Background" Value="Transparent"/>
-				</Trigger>
-			</Style.Triggers>
 		</Style>
-		-->
 		<!--#endregion-->
 
+		<!--#region TestList Progress Bar -->
+		<Style x:Key="TestListProgressBar" TargetType="ProgressBar">
+			<Setter Property="Background" Value="White"/>
+			<Setter Property="BorderThickness" Value="3"/>
+			<Setter Property="Foreground" Value="{StaticResource SecondaryFontColorBrush}"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ProgressBar">
+						<Grid MinHeight="{TemplateBinding MaxHeight}"
+							  MinWidth="{TemplateBinding MaxWidth}"
+							  Background="Transparent">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Determinate"/>
+									<VisualState x:Name="Indeterminate">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Duration="0:0:0"
+																		   Storyboard.TargetName="PART_Indicator"
+																		   Storyboard.TargetProperty="background">
+												<DiscreteObjectKeyFrame KeyTime="0:0:0">
+													<DiscreteObjectKeyFrame.Value>
+														<SolidColorBrush>Transparent</SolidColorBrush>
+													</DiscreteObjectKeyFrame.Value>
+												</DiscreteObjectKeyFrame>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Border x:Name="PART_Track"
+									CornerRadius="10"
+									BorderThickness="{TemplateBinding BorderThickness}">
+								<Border.BorderBrush>
+									<SolidColorBrush Color="{StaticResource SecondaryColor}"/>
+								</Border.BorderBrush>
+							</Border>
+							<Border x:Name="PART_Indicator"
+									CornerRadius="10"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									HorizontalAlignment="Left"
+									Background="{TemplateBinding Foreground}"
+									Padding="0">
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
 
 	</Application.Resources>
 </Application>

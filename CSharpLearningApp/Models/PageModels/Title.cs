@@ -11,8 +11,8 @@ namespace CSharpLearningApp.Models.PageModels
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public virtual List<Subtitle> Subtitles { get; set; } = new List<Subtitle>();
+        public List<Subtitle> Subtitles { get; set; } = new List<Subtitle>();
 
-		public virtual Practice Practice { get; set; }
+        public Practice Practice { get; set; } = null;
 	}
 }

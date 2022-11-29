@@ -1,4 +1,5 @@
 ﻿using CSharpLearningApp.Classes;
+using CSharpLearningApp.Classes.Navigation;
 using CSharpLearningApp.PageData;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,14 @@ namespace CSharpLearningApp.Templates
         {
             InitializeComponent();
 			TBlockWindowTitle.Text = currentTitle;
-            ThemeWindowMainFrame.Content = new MainPage(currentTitle);
+            this.Title = currentTitle;
+            NavigationManager.MainFrame = ThemeWindowMainFrame;
+            NavigationManager.MainFrame.Navigate(new MainPage(currentTitle));
+		}
+
+        private void ButtonCloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSharpLearningApp.Classes.Navigation;
+using CSharpLearningApp.Models.PageModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,20 @@ namespace CSharpLearningApp.Templates
 	/// <summary>
 	/// Логика взаимодействия для TheoryPage.xaml
 	/// </summary>
-	public partial class TheoryPage : UserControl
+	public partial class TheoryPage : Page
 	{
-		public TheoryPage()
+		public TheoryPage(Theory theory)
 		{
 			InitializeComponent();
+			if (theory != null)
+			{
+				TBlockTheoryText.Text = theory.TheoryContent;
+			}
+		}
+
+		private void ButtonGoBack_Click(object sender, RoutedEventArgs e)
+		{
+			NavigationManager.MainFrame.GoBack();
 		}
 	}
 }

@@ -11,15 +11,10 @@ namespace CSharpLearningApp.PageData.PageByKamilya
 {
     public class PageTitleData : PageDataBasic
 	{
-		private readonly ApplicationContext _db;
-		public PageTitleData()
-		{
-			_db = ApplicationContext.GetContext();
-		}
-
 		public void AddData(string titleName)
 		{
-			if (!_db.Titles.ToList().Exists(p => p.Name == titleName))
+			var context = ApplicationContext.GetContext();
+			if (!context.Titles.ToList().Exists(p => p.Name == titleName))
 			{
 				Title title = new Title { Name = titleName }; // Create title
 
@@ -43,11 +38,11 @@ namespace CSharpLearningApp.PageData.PageByKamilya
 					Subtitle_2("Глава 2. Константы",
 							   "Теория",
 							   title)
-				}); 
+				});
 				#endregion
 
-				_db.Titles.Add(title); // Add created title to db
-				_db.SaveChanges();
+				context.Titles.Add(title); // Add created title to db
+				context.SaveChanges();
 			}
 		}
 

@@ -11,11 +11,11 @@ namespace CSharpLearningApp.Models.PageModels.TestModels
     {
         public int ID { get; set; }
         public string Question { get; set; }
-        public virtual List<Answer> Answers { get; set; } = new List<Answer>();
+        public List<Answer> Answers { get; set; } = new List<Answer>();
         public string CorrectAnswer { get; set; }
         public int TestListID { get; set; }
 
-        public virtual TestList TestList { get; set; }
+        public TestList TestList { get; set; }
 
     }
 }

@@ -14,6 +14,6 @@ namespace CSharpLearningApp.Models.PageModels.TestModels
         public bool IsCorrect { get; set; } = false;
         public int TestQuestionID { get; set; }
 
-        public virtual TestQuestion TestQuestion { get; set; }
+        public TestQuestion TestQuestion { get; set; }
     }
 }

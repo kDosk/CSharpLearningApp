@@ -13,6 +13,6 @@ namespace CSharpLearningApp.Models.PageModels
         public string TheoryContent { get; set; }
         public int SubtitleID { get; set; }
 
-        public virtual Subtitle Subtitle { get; set; }
+        public Subtitle Subtitle { get; set; }
     }
 }

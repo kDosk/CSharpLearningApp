@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpLearningApp.Models.PageModels.TestModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,16 @@ namespace CSharpLearningApp.Templates
 	/// <summary>
 	/// Логика взаимодействия для TestPage.xaml
 	/// </summary>
-	public partial class TestPage : UserControl
+	public partial class TestPage : Page
 	{
-		public TestPage()
+		public TestPage(TestList currentTestList)
 		{
 			InitializeComponent();
+		}
+
+		private void ButtonGoBack_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

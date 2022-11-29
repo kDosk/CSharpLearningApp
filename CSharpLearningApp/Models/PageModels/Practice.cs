@@ -14,6 +14,6 @@ namespace CSharpLearningApp.Models.PageModels
         public string CorrectAnswer { get; set; }
         public int TitleID { get; set; }
 
-        public virtual Title Title { get; set; }
+        public Title Title { get; set; }
     }
 }

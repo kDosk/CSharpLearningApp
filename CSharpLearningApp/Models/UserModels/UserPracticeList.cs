@@ -17,7 +17,7 @@ namespace CSharpLearningApp.Models.UserModels
         public int PracticeID { get; set; }
 
 
-        public virtual User User { get; set; }
-        public virtual Practice Practice { get; set; }
+        public User User { get; set; }
+        public Practice Practice { get; set; }
     }
 }

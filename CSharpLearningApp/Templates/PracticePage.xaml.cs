@@ -18,7 +18,7 @@ namespace CSharpLearningApp.Templates
 	/// <summary>
 	/// Логика взаимодействия для PracticePage.xaml
 	/// </summary>
-	public partial class PracticePage : UserControl
+	public partial class PracticePage : Page
 	{
 		public PracticePage()
 		{
