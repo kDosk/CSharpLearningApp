@@ -13,9 +13,9 @@ namespace CSharpLearningApp.Classes.MessageService
         {
             MessageBox.Show(message, "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        public static void ShowExclamination(string exclamination)
+        public static void ShowQuestion(string question)
         {
-            MessageBox.Show(exclamination, "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            MessageBox.Show(question, "Вопрос", MessageBoxButton.OK, MessageBoxImage.Question);
         }
         public static void ShowError(string error)
         {

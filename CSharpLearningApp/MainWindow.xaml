@@ -148,7 +148,7 @@
         </Grid>
 
         <!--#region ModalWindow -->
-        <modal:ModalWindowControl x:Name="AuthModalWindow" Grid.RowSpan="2" IsOpen="False">
+        <modal:ModalWindowControl x:Name="AuthModalWindow" Grid.RowSpan="2">
             <!--#region AuthorizationPage -->
             <Grid x:Name="AuthGrid" Grid.Column="1" VerticalAlignment="Center" Height="350" Width="350" Margin="10">
                 <Grid.RowDefinitions>
@@ -304,5 +304,25 @@
             <!--#endregion-->
         </modal:ModalWindowControl>
         <!--#endregion-->
+
+		<modal:ModalWindowControl x:Name="UserInfoModalWindow" Grid.RowSpan="2" IsOpen="False">
+			<Grid Height="200" Width="300">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+				<Grid>
+					<TextBlock x:Name="TBlockUserInfo" Style="{StaticResource TextBlockH1BlackFont}" VerticalAlignment="Center" TextAlignment="Center"/>
+				</Grid>
+				<Grid Grid.Row="2">
+					<Button Grid.Row="2" Width="120" Margin="10" HorizontalAlignment="Left" Style="{StaticResource RoundedButton}" Click="HideModal_Click">
+						<TextBlock Text="Назад" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+					</Button>
+					<Button Grid.Row="2" Width="120" Margin="10" HorizontalAlignment="Right" Style="{StaticResource RoundedButton}" Click="UserExit_Click">
+						<TextBlock Text="Выход" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+					</Button>
+				</Grid>
+			</Grid>
+		</modal:ModalWindowControl>
     </Grid>
 </Window>

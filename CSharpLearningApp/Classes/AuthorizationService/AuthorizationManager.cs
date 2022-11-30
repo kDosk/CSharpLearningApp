@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CSharpLearningApp.Classes.AuthorizationService
 {
@@ -15,40 +16,65 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 	{
 		public static User CurrentUser { get; set; } = null;
 
-		public static void SignUp(string name, string surname, string login, string password, string confitmPassword)
+		public static bool SignUp(string name, string surname, string login, string password, string confitmPassword)
 		{
-			if (password == confitmPassword)
+			bool toogle = false;
+			if (NotNullValidation(name, surname, login, password, confitmPassword))
 			{
-				var user = Authorization.AddUser(name, surname, login, password);
+				if (password == confitmPassword)
+				{
+					var user = Authorization.AddUser(name, surname, login, password);
+					if (user == null)
+					{
+						MessageService.MessageService.ShowError("Ошибка регистрации");
+					}
+					else
+					{
+						CurrentUser = user;
+						MessageService.MessageService.ShowMessage("Успешно!");
+						toogle = true;
+					}
+				}
+				else
+				{
+					MessageService.MessageService.ShowError("Пароли не совпадают");
+				} 
+			}
+			return toogle;
+		}
+		public static bool SignIn(string login, string password)
+		{
+			bool toogle = false;
+			if (NotNullValidation(login, password))
+			{
+				var user = Authorization.GetUser(login, password);
 				if (user == null)
 				{
-					MessageService.MessageService.ShowMessage("Ошибка регистрации");
+					MessageService.MessageService.ShowError("Пользователь не найден");
 				}
 				else
 				{
 					CurrentUser = user;
 					MessageService.MessageService.ShowMessage("Успешно!");
-				}
+					toogle = true;
+				} 
 			}
-			else
-			{
-				MessageService.MessageService.ShowError("Пароли не совпадают");
-			}
-		}
-		public static void SignIn(string login, string password)
-		{
-			var user = Authorization.GetUser(login, password);
-			if (user == null)
-			{
-				MessageService.MessageService.ShowMessage("Пользователь не найден");
-			}
-			else
-			{
-				CurrentUser = user;
-				MessageService.MessageService.ShowMessage("Успешно!");
-			}
+			return toogle;
 		}
 
-		
+		private static bool NotNullValidation(params string[] strings)
+		{
+			bool result = true;
+			foreach (string s in strings)
+			{
+				if (string.IsNullOrWhiteSpace(s))
+				{
+					result = false;
+					MessageService.MessageService.ShowError("Проверьте введенные данные!");
+					break;
+				}
+			}
+			return result;
+		}
 	}
 }

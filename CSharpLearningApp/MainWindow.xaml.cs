@@ -35,45 +35,52 @@ namespace CSharpLearningApp
         {
             var currentThemeTitle = ((sender as Button).Content as TextBlock).Text;
 			//Переход к окну по названию нажатой кнопки
-			switch (currentThemeTitle)
+			if (AuthorizationManager.CurrentUser != null)
 			{
-				case "Переменные и константы":
-					new PageData.PageByKamilya.PageTitleData().AddData(currentThemeTitle);
-                    ShowWindow(currentThemeTitle);
-                    break;
-				//case "Типы данных":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Арифметические вычисления":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Операции присваивания":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Преобразование базовых типов данных":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Условные выражения":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Циклы":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Массивы":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Методы":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Оператор return":
-				//	ShowWindow(new Window());
-				//	break;
-				//case "Перечисления enum":
-				//	ShowWindow(new Window());
-				//	break;
-				default:
-					MessageBox.Show("Ошибка выполнения.");
-					break;
+				switch (currentThemeTitle)
+				{
+					case "Переменные и константы":
+						new PageData.PageByKamilya.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
+						break;
+					//case "Типы данных":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Арифметические вычисления":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Операции присваивания":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Преобразование базовых типов данных":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Условные выражения":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Циклы":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Массивы":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Методы":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Оператор return":
+					//	ShowWindow(new Window());
+					//	break;
+					//case "Перечисления enum":
+					//	ShowWindow(new Window());
+					//	break;
+					default:
+						MessageBox.Show("Ошибка выполнения.");
+						break;
+				}
+			}
+			else
+			{
+				MessageService.ShowError("Выполните авторизацию.");
 			}
 		}
 
@@ -88,21 +95,39 @@ namespace CSharpLearningApp
 			switch ((AuthorizationButton.Content as TextBlock).Text)
 			{
 				case "Вход":
-					AuthorizationManager.SignIn(TBoxSignInLogin.Text, TBoxSignInPass.Password);
+					if (AuthorizationManager.SignIn(TBoxSignInLogin.Text, TBoxSignInPass.Password))
+					{
+						HideModal();
+						TBlockUserInfo.Text = $"Текущий пользователь:\n{AuthorizationManager.CurrentUser.Surname} {AuthorizationManager.CurrentUser.Name}";
+					}
 					break;
 				case "Регистрация":
-					AuthorizationManager.SignUp(TBoxSignUpName.Text, TBoxSignUpSurname.Text, TBoxSignUpLogin.Text, TBoxSignUpPass.Password, TBoxSignUpPassConfirm.Password);
+					if (AuthorizationManager.SignUp(TBoxSignUpName.Text, TBoxSignUpSurname.Text, TBoxSignUpLogin.Text, TBoxSignUpPass.Password, TBoxSignUpPassConfirm.Password))
+					{
+						HideModal();
+						TBlockUserInfo.Text = $"Текущий пользователь:\n{AuthorizationManager.CurrentUser.Surname} {AuthorizationManager.CurrentUser.Name}";
+					}
 					break;
 				default:
 					break;
 			}
 		}
+		private void UserExit_Click(object sender, RoutedEventArgs e)
+		{
+			if (MessageBox.Show("Выйти из аккаунта?", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+			{
+				AuthorizationManager.CurrentUser = null;
+				TBlockUserInfo.Text = string.Empty;
+				HideModal();
+			}
+		}
 
+		#region ChangeButtonText
 		private void gridSignUp_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			if (gridSignUp.Visibility == Visibility.Visible)
 			{
-				(AuthorizationButton.Content as TextBlock).Text = "Регистрация"; 
+				(AuthorizationButton.Content as TextBlock).Text = "Регистрация";
 			}
 		}
 
@@ -113,30 +138,49 @@ namespace CSharpLearningApp
 				(AuthorizationButton.Content as TextBlock).Text = "Вход";
 			}
 		}
-
-
+		#endregion
 
 		#region Show/Hide modal window
 		private void ShowModal_Click(object sender, RoutedEventArgs e)
         {
             ShowModal();
+			Clear();
         }
 
         private void HideModal_Click(object sender, RoutedEventArgs e)
         {
             HideModal();
-        }
+			Clear();
+		}
 
         private void ShowModal()
         {
-            AuthModalWindow.IsOpen = true;
+			if (AuthorizationManager.CurrentUser == null)
+			{
+				AuthModalWindow.IsOpen = true; 
+			}
+			else
+			{
+				UserInfoModalWindow.IsOpen = true;
+			}
         }
         private void HideModal()
         {
             AuthModalWindow.IsOpen = false;
-        }
+			UserInfoModalWindow.IsOpen = false;
+		}
 		#endregion
 
-		
+		private void Clear()
+		{
+			TBoxSignInLogin.Text = String.Empty;
+			TBoxSignInPass.Password = String.Empty;
+
+			TBoxSignUpLogin.Text = String.Empty;
+			TBoxSignUpName.Text = String.Empty;
+			TBoxSignUpSurname.Text = String.Empty;
+			TBoxSignUpPass.Password = String.Empty;
+			TBoxSignUpPassConfirm.Password = String.Empty;
+		}
 	}
 }

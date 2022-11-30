@@ -1,4 +1,8 @@
-﻿using CSharpLearningApp.Classes.MessageService;
+﻿using CSharpLearningApp.Classes;
+using CSharpLearningApp.Classes.AuthorizationService;
+using CSharpLearningApp.Classes.Calculation;
+using CSharpLearningApp.Classes.MessageService;
+using CSharpLearningApp.Classes.Navigation;
 using CSharpLearningApp.Models.PageModels.TestModels;
 using System;
 using System.Collections.Generic;
@@ -27,6 +31,7 @@ namespace CSharpLearningApp.Templates
 
 		private TestQuestion _currentTestQuestion;
 		private int _currentTestQuestionNumber = 0;
+
 		public TestPage(TestList currentTestList)
 		{
 			InitializeComponent();
@@ -41,15 +46,16 @@ namespace CSharpLearningApp.Templates
 			DataContext = _currentTestQuestion;
 		}
 
+		#region Test buttons eventArgs
 		private void ButtonSkipAnswer_Click(object sender, RoutedEventArgs e)
 		{
 			if ((ButtonNextAnswer.Content as TextBlock).Text == "Завершить тестирование")
 			{
-				MessageService.ShowMessage("Тестирование завершено!");
+				TestListResult();
 			}
 			else
 			{
-				GoNextAnswer(); 
+				GoNextAnswer();
 			}
 		}
 
@@ -57,13 +63,13 @@ namespace CSharpLearningApp.Templates
 		{
 			if (IsCheckedNotNull())
 			{
-				if ((ButtonNextAnswer.Content as TextBlock).Text != "Завершить тестирование")
+				if ((ButtonNextAnswer.Content as TextBlock).Text == "Завершить тестирование")
 				{
-					GoNextAnswer();
+					TestListResult();
 				}
 				else
 				{
-					MessageService.ShowMessage("Тестирование завершено!");
+					GoNextAnswer();
 				}
 			}
 			else
@@ -71,11 +77,27 @@ namespace CSharpLearningApp.Templates
 				MessageService.ShowError("Выберите правильный ответ.");
 			}
 		}
+		#endregion
+
+		#region Test show result method
+		private void TestListResult()
+		{
+			MessageService.ShowMessage(TestCalculate.Calculate(_testList));
+			AuthorizationManager.CurrentUser.UserTestList.Single(p => p.TestList == _testList).IsPassed = true;
+			ApplicationContext.GetContext().SaveChanges();
+			NavigationManager.MainFrame.GoBack();
+		} 
+		#endregion
+
+		#region Test progressbar
 		private void UpdateProgressBar()
 		{
 			TestProgress.Value = _currentTestQuestionNumber + 1;
 			TestProgressText.Text = $"{_currentTestQuestionNumber + 1} из {_testQuestionsList.Count}";
 		}
+		#endregion
+
+		#region Answer navigation method
 		private void GoNextAnswer()
 		{
 			_currentTestQuestionNumber++;
@@ -91,8 +113,10 @@ namespace CSharpLearningApp.Templates
 					(ButtonNextAnswer.Content as TextBlock).Text = "Завершить тестирование";
 				}
 			}
-		}
+		} 
+		#endregion
 
+		#region Is checked not null validation method
 		private bool IsCheckedNotNull()
 		{
 			bool isCheckedNotNullValue = false;
@@ -105,6 +129,7 @@ namespace CSharpLearningApp.Templates
 				}
 			}
 			return isCheckedNotNullValue;
-		}
+		} 
+		#endregion
 	}
 }

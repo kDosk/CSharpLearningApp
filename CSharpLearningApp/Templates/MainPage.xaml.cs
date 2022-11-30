@@ -18,6 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CSharpLearningApp.Classes.AuthorizationService;
+using CSharpLearningApp.Classes.MessageService;
 
 namespace CSharpLearningApp.Templates
 {
@@ -53,12 +55,37 @@ namespace CSharpLearningApp.Templates
 		private void TestButton_Click(object sender, RoutedEventArgs e)
 		{
 			var currentTestListData = ((sender as Button).DataContext as Subtitle).TestList;
-			NavigationManager.MainFrame.Navigate(new TestPage(currentTestListData));
+			if (!AuthorizationManager.CurrentUser.UserTestList.Exists(p => p.TestList == currentTestListData))
+			{
+				AuthorizationManager.CurrentUser.UserTestList.Add(new Models.UserModels.UserTestList
+				{
+					User = AuthorizationManager.CurrentUser,
+					TestList = currentTestListData
+				});
+				ApplicationContext.GetContext().SaveChanges();
+			}
+			if (!AuthorizationManager.CurrentUser.UserTestList.Where(p => p.TestList == currentTestListData).FirstOrDefault().IsPassed)
+			{
+				NavigationManager.MainFrame.Navigate(new TestPage(currentTestListData));
+			}
+			else
+			{
+				MessageService.ShowError("Данный тест пройден.");
+			}
 		}
 
 		private void PracticeButton_Click(object sender, RoutedEventArgs e)
 		{
 			var currentPractice = _currentTitle.Practice;
+			if (!AuthorizationManager.CurrentUser.UserPracticeList.Exists(p => p.Practice == currentPractice))
+			{
+				AuthorizationManager.CurrentUser.UserPracticeList.Add(new Models.UserModels.UserPracticeList
+				{
+					User = AuthorizationManager.CurrentUser,
+					Practice = currentPractice
+				});
+				ApplicationContext.GetContext().SaveChanges();
+			}
 			NavigationManager.MainFrame.Navigate(new PracticePage());
 		}
 	}

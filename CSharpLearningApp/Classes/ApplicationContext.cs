@@ -34,6 +34,9 @@ namespace CSharpLearningApp.Classes
 		public DbSet<UserPracticeList> UserPracticeLists { get; set; } = null!;
 		public DbSet<User> Users { get; set; } = null!;
 
+		public DbSet<TestScoreLog> TestScoreLogs { get; set; } = null!;
+		public DbSet<PracticeScoreLog> PracticeScoreLogs { get; set; } = null!;
+
 		public ApplicationContext()
 		{
 			Database.EnsureCreated();

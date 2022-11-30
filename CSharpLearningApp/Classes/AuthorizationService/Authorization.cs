@@ -1,8 +1,8 @@
 ﻿using CSharpLearningApp.Classes.MessageService;
 using CSharpLearningApp.Models.UserModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
