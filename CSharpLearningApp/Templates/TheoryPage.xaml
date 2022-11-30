@@ -12,17 +12,11 @@
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
 		<ScrollViewer VerticalScrollBarVisibility="Auto">
-			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="3" CornerRadius="20" MaxWidth="1200" Margin="20">
+			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="3" CornerRadius="20" MaxWidth="1000" Margin="20">
 				<Grid Margin="20">
 					<TextBlock x:Name="TBlockTheoryText" Style="{StaticResource TextBlockH1BlackFont}" FontSize="24"/>
 				</Grid>
 			</Border>
 		</ScrollViewer>
-
-		<Grid Grid.Row="1" Margin="20">
-			<Button Style="{StaticResource RoundedButton}" Width="150" Click="ButtonGoBack_Click">
-				<TextBlock Text="Назад" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
-			</Button>
-		</Grid>
 	</Grid>
 </Page>

@@ -31,9 +31,28 @@ namespace CSharpLearningApp.Templates
             NavigationManager.MainFrame.Navigate(new MainPage(currentTitle));
 		}
 
-        private void ButtonCloseWindow_Click(object sender, RoutedEventArgs e)
+        private void ButtonGoBack_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (ButtonGoBack.Content.ToString() == "На главную")
+            {
+				this.Close();
+			}
+            else
+            {
+				NavigationManager.MainFrame.GoBack();
+			}
         }
+
+        private void ThemeWindowMainFrame_ContentRendered(object sender, EventArgs e)
+        {
+			if (ThemeWindowMainFrame.CanGoBack)
+			{
+				ButtonGoBack.Content = "Назад";
+			}
+			else
+			{
+				ButtonGoBack.Content = "На главную";
+			}
+		}
     }
 }

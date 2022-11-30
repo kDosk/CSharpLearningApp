@@ -30,10 +30,5 @@ namespace CSharpLearningApp.Templates
 				TBlockTheoryText.Text = theory.TheoryContent;
 			}
 		}
-
-		private void ButtonGoBack_Click(object sender, RoutedEventArgs e)
-		{
-			NavigationManager.MainFrame.GoBack();
-		}
 	}
 }

@@ -148,12 +148,13 @@
         </Grid>
 
         <!--#region ModalWindow -->
-        <modal:ModalWindowControl x:Name="AuthModalWindow" Grid.RowSpan="2">
+        <modal:ModalWindowControl x:Name="AuthModalWindow" Grid.RowSpan="2" IsOpen="False">
             <!--#region AuthorizationPage -->
-            <Grid x:Name="AuthGrid" Grid.Column="1" VerticalAlignment="Center" Height="350" Width="350">
+            <Grid x:Name="AuthGrid" Grid.Column="1" VerticalAlignment="Center" Height="350" Width="350" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <!--#region Change auth type buttons -->
@@ -170,11 +171,11 @@
                                     <Storyboard x:Name="ShowSignInPage">
                                         <DoubleAnimation Storyboard.TargetName="gridSignIn"
                                                          Storyboard.TargetProperty="Opacity"
-                                                         From="0" To="1" Duration="0:0:0.15">
+                                                         From="0" To="1" Duration="0:0:0.3">
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="gridSignUp"
                                                          Storyboard.TargetProperty="Opacity"
-                                                         From="1" To="0" Duration="0:0:0.15">
+                                                         From="1" To="0" Duration="0:0:0.3">
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -188,11 +189,11 @@
                                     <Storyboard x:Name="ShowSignUpPage">
                                         <DoubleAnimation Storyboard.TargetName="gridSignUp"
                                                          Storyboard.TargetProperty="Opacity"
-                                                         From="0" To="1" Duration="0:0:0.15">
+                                                         From="0" To="1" Duration="0:0:0.3">
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="gridSignIn"
                                                          Storyboard.TargetProperty="Opacity"
-                                                         From="1" To="0" Duration="0:0:0.15">
+                                                         From="1" To="0" Duration="0:0:0.3">
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -203,7 +204,7 @@
                 <!--#endregion-->
 
                 <!--#region SignIn -->
-                <Grid x:Name="gridSignIn" Grid.Row="1" Opacity="1">
+                <Grid x:Name="gridSignIn" Grid.Row="1" Opacity="1" IsVisibleChanged="gridSignIn_IsVisibleChanged">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
@@ -225,13 +226,6 @@
                         <PasswordBox x:Name="TBoxSignInPass" Grid.Row="1" Grid.Column="1" Margin="5" FontSize="16" VerticalAlignment="Center" Style="{StaticResource PasswordBoxDefault}"/>
                     </Grid>
 
-                    <Button Grid.Row="2" Width="120" Margin="10" HorizontalAlignment="Left" Style="{StaticResource RoundedButton}" Click="HideModal_Click">
-                        <TextBlock Text="Назад" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
-                    </Button>
-
-                    <Button Grid.Row="2" x:Name="SignIn" Width="120" Margin="10" HorizontalAlignment="Right" Style="{StaticResource RoundedButton}" Click="SignIn_Click">
-                        <TextBlock Text="Вход" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
-                    </Button>
                     <Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
@@ -248,49 +242,41 @@
                 <!--#endregion-->
 
                 <!--#region SignUp -->
-                <Grid x:Name="gridSignUp" Grid.Row="1" Opacity="0">
+                <Grid x:Name="gridSignUp" Grid.Row="1" Opacity="0" IsVisibleChanged="gridSignUp_IsVisibleChanged">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <Grid VerticalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Фамилия:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
-                        <TextBox x:Name="TBoxSignUpSurname" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
+					<Grid VerticalAlignment="Center">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Фамилия:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+						<TextBox x:Name="TBoxSignUpSurname" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
 
-                        <TextBlock Grid.Row="1" Text="Имя:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
-                        <TextBox Grid.Row="1" x:Name="TBoxSignUpName" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
+						<TextBlock Grid.Row="1" Text="Имя:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+						<TextBox Grid.Row="1" x:Name="TBoxSignUpName" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
 
-                        <TextBlock Grid.Row="2" Text="Логин:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
-                        <TextBox Grid.Row="2" x:Name="TBoxSignUpLogin" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
+						<TextBlock Grid.Row="2" Text="Логин:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+						<TextBox Grid.Row="2" x:Name="TBoxSignUpLogin" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource TextBoxDefault}"/>
 
-                        <TextBlock Grid.Row="3" Text="Пароль:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
-                        <PasswordBox x:Name="TBoxSignUpPass" Grid.Row="3" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource PasswordBoxDefault}"/>
+						<TextBlock Grid.Row="3" Text="Пароль:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+						<PasswordBox x:Name="TBoxSignUpPass" Grid.Row="3" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource PasswordBoxDefault}"/>
 
-                        <TextBlock Grid.Row="4" Text="Повтор пароля:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
-                        <PasswordBox x:Name="TBoxSignUpPassConfirm" Grid.Row="4" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource PasswordBoxDefault}"/>
-                    </Grid>
+						<TextBlock Grid.Row="4" Text="Повтор пароля:" VerticalAlignment="Center" Margin="10 5" Style="{StaticResource TextBlockH2BlackFont}"/>
+						<PasswordBox x:Name="TBoxSignUpPassConfirm" Grid.Row="4" Grid.Column="1" Margin="5" FontSize="16" Style="{StaticResource PasswordBoxDefault}"/>
+					</Grid>
 
-                    <Button Grid.Row="1" Width="120" Margin="10" HorizontalAlignment="Left" Style="{StaticResource RoundedButton}" Click="HideModal_Click">
-                        <TextBlock Text="Назад" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
-                    </Button>
-
-                    <Button Grid.Row="1" x:Name="SignUp" Width="120" Margin="10" HorizontalAlignment="Right" Style="{StaticResource RoundedButton}" Click="SignUp_Click">
-                        <TextBlock Text="Регистрация" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
-                    </Button>
-
-                    <Grid.Style>
+					<Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Opacity, RelativeSource={RelativeSource Mode=Self}, UpdateSourceTrigger=PropertyChanged}" Value="0">
@@ -304,6 +290,16 @@
                     </Grid.Style>
                 </Grid>
                 <!--#endregion-->
+
+				<Grid Grid.Row="2">
+					<Button Grid.Row="2" Width="120" Margin="10" HorizontalAlignment="Left" Style="{StaticResource RoundedButton}" Click="HideModal_Click">
+						<TextBlock Text="Назад" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+					</Button>
+
+					<Button Grid.Row="2" x:Name="AuthorizationButton" Width="120" Margin="10" HorizontalAlignment="Right" Style="{StaticResource RoundedButton}" Click="AuthorizationButton_Click">
+						<TextBlock Text="Вход" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+					</Button>
+				</Grid>
             </Grid>
             <!--#endregion-->
         </modal:ModalWindowControl>

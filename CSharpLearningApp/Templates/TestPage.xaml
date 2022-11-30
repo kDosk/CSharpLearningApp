@@ -13,7 +13,7 @@
 				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
-			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="3" CornerRadius="20" VerticalAlignment="Center" MaxWidth="7000">
+			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="3" CornerRadius="20" VerticalAlignment="Center" MaxWidth="1000">
 				<Grid Margin="15">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="auto"/>
@@ -23,33 +23,33 @@
 					</Grid.RowDefinitions>
 
 					<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="0 0 0 3">
-						<TextBlock x:Name="TBoxQuestion" Style="{StaticResource TextBlockH1BlackFont}" Text="Вопрос №1." Margin="5"/>
+						<TextBlock x:Name="TBoxQuestion" Style="{StaticResource TextBlockH1BlackFont}" Text="{Binding Question}" Margin="5"/>
 					</Border>
 					
 					<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="0 0 0 3" Grid.Row="1">
 						<StackPanel Orientation="Horizontal" Margin="0 5">
 							<TextBlock Style="{StaticResource TextBlockH2BlackFont}" Text="Прогресс: " VerticalAlignment="Center" Margin="5"/>
-							<ProgressBar x:Name="TestProgress" Style="{StaticResource TestListProgressBar}" Margin="5" Width="150" Height="20" Value="10" Maximum="20"/>
-							<TextBlock Style="{StaticResource TextBlockH2BlackFont}" Text="5 из 10" VerticalAlignment="Center" Margin="5"/>
+							<ProgressBar x:Name="TestProgress" Style="{StaticResource TestListProgressBar}" Margin="5" Width="150" Height="20" SnapsToDevicePixels="True"/>
+							<TextBlock x:Name="TestProgressText" Style="{StaticResource TextBlockH2BlackFont}" VerticalAlignment="Center" Margin="5"/>
 						</StackPanel>
 					</Border>
 
-					<ListView Grid.Row="2" Style="{StaticResource ListViewDefault}" Margin="15 5">
+					<ListView Grid.Row="2" Style="{StaticResource ListViewDefault}" Margin="15 5" ItemsSource="{Binding Answers}">
 						
 						<ListView.ItemTemplate>
 							<DataTemplate>
-								<RadioButton Style="{StaticResource RadioButtonAnswers}" GroupName="">
-									<TextBlock Text="Типы данных" Style="{StaticResource TextBlockH1BlackFontWithAnimation}" VerticalAlignment="Center" Margin="15 0"/>
+								<RadioButton Style="{StaticResource RadioButtonAnswers}" GroupName="{Binding TestQuestionID}" IsChecked="{Binding IsCorrect}">
+									<TextBlock Text="{Binding Value}" Style="{StaticResource TextBlockH1BlackFontWithAnimation}" VerticalAlignment="Center" Margin="15 0"/>
 								</RadioButton>
 							</DataTemplate>
 						</ListView.ItemTemplate>
 					</ListView>
 
 					<Grid Grid.Row="3" Margin="10">
-						<Button  Style="{StaticResource RoundedButton}" Width="240" HorizontalAlignment="Left" Click="ButtonGoBack_Click">
+						<Button x:Name="ButtonSkipAnswer" Style="{StaticResource RoundedButton}" Width="240" HorizontalAlignment="Left" Click="ButtonSkipAnswer_Click">
 							<TextBlock Text="Пропустить вопрос" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
 						</Button>
-						<Button  Style="{StaticResource RoundedButton}" Width="240" HorizontalAlignment="Right" Click="ButtonGoBack_Click">
+						<Button x:Name="ButtonNextAnswer" Style="{StaticResource RoundedButton}" Width="240" HorizontalAlignment="Right" Click="ButtonNextAnswer_Click">
 							<TextBlock Text="Следующий вопрос" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
 						</Button>
 					</Grid>

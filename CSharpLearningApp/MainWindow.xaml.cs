@@ -1,6 +1,8 @@
 ﻿using CSharpLearningApp.Classes;
+using CSharpLearningApp.Classes.AuthorizationService;
 using CSharpLearningApp.Classes.MessageService;
 using CSharpLearningApp.Models;
+using CSharpLearningApp.Models.UserModels;
 using CSharpLearningApp.PageData;
 using CSharpLearningApp.Templates;
 using System;
@@ -81,31 +83,41 @@ namespace CSharpLearningApp
 			window.ShowDialog();
         }
 
-        private void SignUp_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-		private void SignIn_Click(object sender, RoutedEventArgs e)
+		private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			switch ((AuthorizationButton.Content as TextBlock).Text)
+			{
+				case "Вход":
+					AuthorizationManager.SignIn(TBoxSignInLogin.Text, TBoxSignInPass.Password);
+					break;
+				case "Регистрация":
+					AuthorizationManager.SignUp(TBoxSignUpName.Text, TBoxSignUpSurname.Text, TBoxSignUpLogin.Text, TBoxSignUpPass.Password, TBoxSignUpPassConfirm.Password);
+					break;
+				default:
+					break;
+			}
 		}
 
-		private void SignInButton_Checked(object sender, RoutedEventArgs e)
-        {
-            gridSignIn.Visibility = Visibility.Visible;
-            gridSignUp.Visibility = Visibility.Hidden;
-        }
+		private void gridSignUp_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			if (gridSignUp.Visibility == Visibility.Visible)
+			{
+				(AuthorizationButton.Content as TextBlock).Text = "Регистрация"; 
+			}
+		}
 
-        private void SignUpButton_Checked(object sender, RoutedEventArgs e)
-        {
-            gridSignUp.Visibility = Visibility.Visible;
-            gridSignIn.Visibility = Visibility.Hidden;
-        }
+		private void gridSignIn_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			if (gridSignIn.Visibility == Visibility.Visible)
+			{
+				(AuthorizationButton.Content as TextBlock).Text = "Вход";
+			}
+		}
 
 
 
-        #region Show/Hide modal window
-        private void ShowModal_Click(object sender, RoutedEventArgs e)
+		#region Show/Hide modal window
+		private void ShowModal_Click(object sender, RoutedEventArgs e)
         {
             ShowModal();
         }
@@ -122,7 +134,9 @@ namespace CSharpLearningApp
         private void HideModal()
         {
             AuthModalWindow.IsOpen = false;
-        } 
-        #endregion
-    }
+        }
+		#endregion
+
+		
+	}
 }
