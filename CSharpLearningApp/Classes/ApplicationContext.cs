@@ -2,13 +2,6 @@
 using CSharpLearningApp.Models.PageModels.TestModels;
 using CSharpLearningApp.Models.UserModels;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace CSharpLearningApp.Classes
 {
@@ -18,7 +11,7 @@ namespace CSharpLearningApp.Classes
 
 		public static ApplicationContext GetContext()
 		{
-			if (_context == null )
+			if (_context == null)
 				_context = new ApplicationContext();
 			return _context;
 		}

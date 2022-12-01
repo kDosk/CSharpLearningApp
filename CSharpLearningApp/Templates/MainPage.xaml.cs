@@ -1,25 +1,12 @@
 ﻿using CSharpLearningApp.Classes;
-using CSharpLearningApp.Classes.Navigation;
-using CSharpLearningApp.Models;
-using CSharpLearningApp.Models.PageModels;
-using CSharpLearningApp.PageData.PageByKamilya;
-using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using CSharpLearningApp.Classes.AuthorizationService;
 using CSharpLearningApp.Classes.MessageService;
+using CSharpLearningApp.Classes.Navigation;
+using CSharpLearningApp.Models.PageModels;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace CSharpLearningApp.Templates
 {
@@ -43,7 +30,7 @@ namespace CSharpLearningApp.Templates
 																									 .Include(p => p.Practice).FirstOrDefault();
 				DataContext = _currentTitle;
 			}
-			
+
 		}
 
 		private void TheoryButton_Click(object sender, RoutedEventArgs e)
@@ -86,7 +73,14 @@ namespace CSharpLearningApp.Templates
 				});
 				ApplicationContext.GetContext().SaveChanges();
 			}
-			NavigationManager.MainFrame.Navigate(new PracticePage());
+			if (!AuthorizationManager.CurrentUser.UserPracticeList.Where(p => p.Practice == currentPractice).FirstOrDefault().IsPassed)
+			{
+				NavigationManager.MainFrame.Navigate(new PracticePage(currentPractice));
+			}
+			else
+			{
+				MessageService.ShowError("Данное практическое задание пройдено.");
+			}
 		}
 	}
 }

@@ -1,12 +1,9 @@
-﻿using CSharpLearningApp.Classes.MessageService;
-using CSharpLearningApp.Models.UserModels;
+﻿using CSharpLearningApp.Models.UserModels;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpLearningApp.Classes.AuthorizationService
 {
@@ -26,7 +23,7 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 						Password = HashingPassword(password),
 					});
 					ApplicationContext.GetContext().SaveChanges();
-					return GetUser(login, password); 
+					return GetUser(login, password);
 				}
 				else
 				{
@@ -74,7 +71,7 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 			return toggle;
 		}
 
-		#pragma warning disable SYSLIB0021
+#pragma warning disable SYSLIB0021
 		private static string HashingPassword(string password)
 		{
 			using (var sha256 = new SHA256Managed())
@@ -82,6 +79,6 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 				return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(password))).Replace("-", "");
 			}
 		}
-		#pragma warning restore SYSLIB0021
+#pragma warning restore SYSLIB0021
 	}
 }

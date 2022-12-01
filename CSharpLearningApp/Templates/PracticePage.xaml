@@ -5,8 +5,75 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSharpLearningApp.Templates"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="720" d:DesignWidth="1280">
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="120"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+		<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="5" MaxWidth="1200" Margin="20 0" CornerRadius="0 0 20 20">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Border Background="{StaticResource PrimaryColorBrush}" BorderThickness="0">
+					<TextBlock Style="{StaticResource TextBlockH1}" Text="Задание" HorizontalAlignment="Center" Margin="0 10"/>
+				</Border>
+				<TextBlock x:Name="TBlockTask" Style="{StaticResource TextBlockH1BlackFont}" Margin="5" VerticalAlignment="Center" TextAlignment="Center" FontSize="18" Grid.Row="1"/>
+			</Grid>
+		</Border>
+
+		<Grid Grid.Row="1" MaxWidth="1200">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="5" MaxWidth="1200" Margin="20" CornerRadius="20">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<Border Background="{StaticResource PrimaryColorBrush}" BorderThickness="0" CornerRadius="15 15 0 0">
+						<TextBlock Style="{StaticResource TextBlockH1}" Text="Редактор" HorizontalAlignment="Center" Margin="0 10"/>
+					</Border>
+					
+					<TextBox x:Name="TBoxInput" Style="{StaticResource TextBoxPracticePage}" Margin="10" Background="Transparent" Grid.Row="1" AcceptsReturn="True"/>
+				
+				</Grid>
+			</Border>
+
+			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="5" MaxWidth="1200" Margin="20" CornerRadius="20" Grid.Column="1">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<Border Background="{StaticResource PrimaryColorBrush}" BorderThickness="0" CornerRadius="15 15 0 0">
+						<TextBlock Style="{StaticResource TextBlockH1}" Text="Вывод" HorizontalAlignment="Center" Margin="0 10"/>
+					</Border>
+					
+					<TextBlock x:Name="TBoxOutput" Style="{StaticResource TextBlockH1BlackFont}" Margin="10" Grid.Row="1"/>
+				</Grid>
+			</Border>
+		</Grid>
+
+		<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="5" MaxWidth="1200" Margin="20 0" CornerRadius="20 20 0 0" Grid.Row="2">
+			<Grid Grid.Row="3" Margin="50 15">
+				<Button x:Name="ButtonCompile" Style="{StaticResource RoundedButton}" Width="240" HorizontalAlignment="Left" Command="{Binding CompileCommand}">
+					<TextBlock Text="Скомпилировать" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+				</Button>
+				<Button x:Name="ButtonConfirmPractice" Style="{StaticResource RoundedButton}" Width="240" HorizontalAlignment="Right" Click="ButtonConfirm_Click">
+					<TextBlock Text="Завершить" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+				</Button>
+			</Grid>
+		</Border>
+
+	</Grid>
 </Page>

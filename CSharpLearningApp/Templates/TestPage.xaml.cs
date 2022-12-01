@@ -4,20 +4,10 @@ using CSharpLearningApp.Classes.Calculation;
 using CSharpLearningApp.Classes.MessageService;
 using CSharpLearningApp.Classes.Navigation;
 using CSharpLearningApp.Models.PageModels.TestModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CSharpLearningApp.Templates
 {
@@ -86,7 +76,7 @@ namespace CSharpLearningApp.Templates
 			AuthorizationManager.CurrentUser.UserTestList.Single(p => p.TestList == _testList).IsPassed = true;
 			ApplicationContext.GetContext().SaveChanges();
 			NavigationManager.MainFrame.GoBack();
-		} 
+		}
 		#endregion
 
 		#region Test progressbar
@@ -113,7 +103,7 @@ namespace CSharpLearningApp.Templates
 					(ButtonNextAnswer.Content as TextBlock).Text = "Завершить тестирование";
 				}
 			}
-		} 
+		}
 		#endregion
 
 		#region Is checked not null validation method
@@ -129,7 +119,7 @@ namespace CSharpLearningApp.Templates
 				}
 			}
 			return isCheckedNotNullValue;
-		} 
+		}
 		#endregion
 	}
 }

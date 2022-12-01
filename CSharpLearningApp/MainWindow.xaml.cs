@@ -1,39 +1,24 @@
-﻿using CSharpLearningApp.Classes;
-using CSharpLearningApp.Classes.AuthorizationService;
+﻿using CSharpLearningApp.Classes.AuthorizationService;
 using CSharpLearningApp.Classes.MessageService;
-using CSharpLearningApp.Models;
-using CSharpLearningApp.Models.UserModels;
-using CSharpLearningApp.PageData;
 using CSharpLearningApp.Templates;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CSharpLearningApp
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-        private void NavigateButton_Click(object sender, RoutedEventArgs e)
-        {
-            var currentThemeTitle = ((sender as Button).Content as TextBlock).Text;
+	/// <summary>
+	/// Логика взаимодействия для MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
+	{
+		public MainWindow()
+		{
+			InitializeComponent();
+		}
+		private void NavigateButton_Click(object sender, RoutedEventArgs e)
+		{
+			var currentThemeTitle = ((sender as Button).Content as TextBlock).Text;
 			//Переход к окну по названию нажатой кнопки
 			if (AuthorizationManager.CurrentUser != null)
 			{
@@ -84,11 +69,11 @@ namespace CSharpLearningApp
 			}
 		}
 
-        private void ShowWindow(string currentTitle)
-        {
-            ThemeWindow window = new ThemeWindow(currentTitle);
+		private void ShowWindow(string currentTitle)
+		{
+			ThemeWindow window = new ThemeWindow(currentTitle);
 			window.ShowDialog();
-        }
+		}
 
 		private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -142,31 +127,31 @@ namespace CSharpLearningApp
 
 		#region Show/Hide modal window
 		private void ShowModal_Click(object sender, RoutedEventArgs e)
-        {
-            ShowModal();
-			Clear();
-        }
-
-        private void HideModal_Click(object sender, RoutedEventArgs e)
-        {
-            HideModal();
+		{
+			ShowModal();
 			Clear();
 		}
 
-        private void ShowModal()
-        {
+		private void HideModal_Click(object sender, RoutedEventArgs e)
+		{
+			HideModal();
+			Clear();
+		}
+
+		private void ShowModal()
+		{
 			if (AuthorizationManager.CurrentUser == null)
 			{
-				AuthModalWindow.IsOpen = true; 
+				AuthModalWindow.IsOpen = true;
 			}
 			else
 			{
 				UserInfoModalWindow.IsOpen = true;
 			}
-        }
-        private void HideModal()
-        {
-            AuthModalWindow.IsOpen = false;
+		}
+		private void HideModal()
+		{
+			AuthModalWindow.IsOpen = false;
 			UserInfoModalWindow.IsOpen = false;
 		}
 		#endregion

@@ -1,15 +1,12 @@
 ﻿using CSharpLearningApp.Classes;
 using CSharpLearningApp.Models.PageModels;
 using CSharpLearningApp.Models.PageModels.TestModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpLearningApp.PageData.PageByKamilya
 {
-    public class PageTitleData : PageDataBasic
+	public class PageTitleData : PageDataBasic
 	{
 		public void AddData(string titleName)
 		{
@@ -24,7 +21,7 @@ namespace CSharpLearningApp.PageData.PageByKamilya
 					Task = "Задача",
 					CorrectAnswer = "Правильный ответ",
 					Title = title
-				}; 
+				};
 				#endregion
 
 				title.Practice = practice; // Add practice to title
@@ -175,7 +172,7 @@ namespace CSharpLearningApp.PageData.PageByKamilya
 													  testList));
 
 			return testList;
-		} 
+		}
 		#endregion
 	}
 }

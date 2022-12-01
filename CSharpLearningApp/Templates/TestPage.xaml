@@ -13,7 +13,7 @@
 				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
-			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="3" CornerRadius="20" VerticalAlignment="Center" MaxWidth="1000">
+			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="5" CornerRadius="20" VerticalAlignment="Center" MaxWidth="1000">
 				<Grid Margin="15">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="auto"/>

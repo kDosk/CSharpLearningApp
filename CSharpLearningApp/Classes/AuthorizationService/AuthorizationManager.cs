@@ -1,14 +1,4 @@
-﻿using CSharpLearningApp.Models;
-using CSharpLearningApp.Classes.MessageService;
-using CSharpLearningApp.Models.UserModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using CSharpLearningApp.Models.UserModels;
 
 namespace CSharpLearningApp.Classes.AuthorizationService
 {
@@ -38,7 +28,7 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 				else
 				{
 					MessageService.MessageService.ShowError("Пароли не совпадают");
-				} 
+				}
 			}
 			return toogle;
 		}
@@ -57,7 +47,7 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 					CurrentUser = user;
 					MessageService.MessageService.ShowMessage("Успешно!");
 					toogle = true;
-				} 
+				}
 			}
 			return toogle;
 		}

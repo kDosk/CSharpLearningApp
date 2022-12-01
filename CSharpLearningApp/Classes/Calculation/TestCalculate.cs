@@ -1,11 +1,7 @@
 ﻿using CSharpLearningApp.Classes.AuthorizationService;
-using CSharpLearningApp.Models;
+using CSharpLearningApp.Models.PageModels;
 using CSharpLearningApp.Models.PageModels.TestModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpLearningApp.Classes.Calculation
 {
@@ -38,7 +34,7 @@ namespace CSharpLearningApp.Classes.Calculation
 
 			string result = $"Тест завершен. Реузльтат: {correctAnswersCount} из {userTestList.Count}.\nОценка: {score}";
 
-			ApplicationContext.GetContext().TestScoreLogs.Add(new Models.PageModels.TestScoreLog
+			ApplicationContext.GetContext().TestScoreLogs.Add(new TestScoreLog
 			{
 				User = AuthorizationManager.CurrentUser,
 				TestList = testList,
@@ -55,7 +51,7 @@ namespace CSharpLearningApp.Classes.Calculation
 			if (correctAnswersPercent >= 80)
 			{
 				return 5;
-			}	
+			}
 			else if (correctAnswersPercent >= 70)
 			{
 				return 4;
