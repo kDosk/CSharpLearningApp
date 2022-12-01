@@ -2,7 +2,7 @@
 
 namespace CSharpLearningApp.Classes.AuthorizationService
 {
-	internal class AuthorizationManager
+	public class AuthorizationManager
 	{
 		public static User CurrentUser { get; set; } = null;
 
@@ -16,7 +16,7 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 					var user = Authorization.AddUser(name, surname, login, password);
 					if (user == null)
 					{
-						MessageService.MessageService.ShowError("Ошибка регистрации");
+						MessageService.MessageService.ShowError("Ошибка регистрации.");
 					}
 					else
 					{
@@ -27,7 +27,7 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 				}
 				else
 				{
-					MessageService.MessageService.ShowError("Пароли не совпадают");
+					MessageService.MessageService.ShowError("Пароли не совпадают.");
 				}
 			}
 			return toogle;
@@ -40,7 +40,7 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 				var user = Authorization.GetUser(login, password);
 				if (user == null)
 				{
-					MessageService.MessageService.ShowError("Пользователь не найден");
+					MessageService.MessageService.ShowError("Проверьте введенные данные.");
 				}
 				else
 				{
