@@ -10,6 +10,8 @@
 	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
 		<StackPanel Orientation="Vertical" Margin="10">
 
+			<TextBlock Text="{Binding TitleCreator, StringFormat={}Модуль разработал(а): {0}}" Style="{StaticResource TextBlockH1BlackFont}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" />
+			
 			<ListView x:Name="LViewTitles" Style="{StaticResource ListViewDefault}" ItemsSource="{Binding Subtitles}">
 
 				<ListView.ItemTemplate>

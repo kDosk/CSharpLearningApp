@@ -16,7 +16,7 @@ namespace CSharpLearningApp.PageData.Page_4
 			var context = ApplicationContext.GetContext();
 			if (!context.Titles.ToList().Exists(p => p.Name == titleName))
 			{
-				Title title = new Title { Name = titleName }; // Create title
+				Title title = new Title { Name = titleName, TitleCreator = "Г. Лилия" }; // Create title
 
 				#region Create Practice
 				Practice practice = null;
