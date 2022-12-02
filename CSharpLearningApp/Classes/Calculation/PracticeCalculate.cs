@@ -1,6 +1,7 @@
 ﻿using CSharpLearningApp.Classes.AuthorizationService;
 using CSharpLearningApp.Classes.Navigation;
 using CSharpLearningApp.Models.PageModels;
+using CSharpLearningApp.Models.PageModels.TestModels;
 using System.Linq;
 using System.Windows;
 
@@ -22,8 +23,10 @@ namespace CSharpLearningApp.Classes.Calculation
 				});
 
 				AuthorizationManager.CurrentUser.UserPracticeList.Single(p => p.Practice == practice).IsPassed = true;
-
 				ApplicationContext.GetContext().SaveChanges();
+
+				InfoStorage.Information += $"{AuthorizationManager.CurrentUser.Surname} {AuthorizationManager.CurrentUser.Name} выполнил практическое задание по теме {practice.Title.Name}. Оценка: \"5\"\n\n";
+
 				NavigationManager.MainFrame.GoBack();
 			}
 			else
@@ -40,6 +43,9 @@ namespace CSharpLearningApp.Classes.Calculation
 					AuthorizationManager.CurrentUser.UserPracticeList.Single(p => p.Practice == practice).IsPassed = true;
 
 					ApplicationContext.GetContext().SaveChanges();
+
+					InfoStorage.Information += $"{AuthorizationManager.CurrentUser.Surname} {AuthorizationManager.CurrentUser.Name} выполнил практическое задание по теме {practice.Title.Name}. Оценка: \"2\"\n\n";
+
 					NavigationManager.MainFrame.GoBack();
 				}
 			}

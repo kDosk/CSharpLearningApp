@@ -34,6 +34,8 @@ namespace CSharpLearningApp.Classes.Calculation
 
 			string result = $"Тест завершен. Реузльтат: {correctAnswersCount} из {userTestList.Count}.\nОценка: {score}";
 
+			InfoStorage.Score = score;
+
 			ApplicationContext.GetContext().TestScoreLogs.Add(new TestScoreLog
 			{
 				User = AuthorizationManager.CurrentUser,

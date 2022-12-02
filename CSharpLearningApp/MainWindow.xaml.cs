@@ -1,4 +1,5 @@
-﻿using CSharpLearningApp.Classes.AuthorizationService;
+﻿using CSharpLearningApp.Classes;
+using CSharpLearningApp.Classes.AuthorizationService;
 using CSharpLearningApp.Classes.MessageService;
 using CSharpLearningApp.Templates;
 using System;
@@ -15,6 +16,7 @@ namespace CSharpLearningApp
 		public MainWindow()
 		{
 			InitializeComponent();
+			TBoxinfo.Text = "Нет данных";
 		}
 		private void NavigateButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -25,43 +27,51 @@ namespace CSharpLearningApp
 				switch (currentThemeTitle)
 				{
 					case "Переменные и константы":
-						new PageData.PageByKamilya.PageTitleData().AddData(currentThemeTitle);
+						new PageData.Page_1.PageTitleData().AddData(currentThemeTitle);
 						ShowWindow(currentThemeTitle);
 						break;
-					//case "Типы данных":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Арифметические вычисления":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Операции присваивания":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Преобразование базовых типов данных":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Условные выражения":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Циклы":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Массивы":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Методы":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Оператор return":
-					//	ShowWindow(new Window());
-					//	break;
-					//case "Перечисления enum":
-					//	ShowWindow(new Window());
-					//	break;
+					case "Типы данных":
+						new PageData.Page_2.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
+						break;
+					case "Арифметические вычисления":
+						new PageData.Page_3.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
+						break;
+					case "Операции присваивания":
+						new PageData.Page_4.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
+						break;
+					case "Преобразование типов данных":
+						MessageService.ShowMessage("Данный элемент в разработке.");
+						break;
+					case "Условные выражения":
+						new PageData.Page_6.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
+						break;
+					case "Циклы":
+						new PageData.Page_7.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
+						break;
+					case "Массивы":
+						MessageService.ShowMessage("Данный элемент в разработке.");
+						break;
+					case "Методы":
+						new PageData.Page_9.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
+						break;
+					case "Оператор return":
+						new PageData.Page_10.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
+						break;
+					case "Перечисления enum":
+						MessageService.ShowMessage("Данный элемент в разработке.");
+						break;
 					default:
 						MessageBox.Show("Ошибка выполнения.");
 						break;
 				}
+				TBoxinfo.Text = InfoStorage.Information;
 			}
 			else
 			{

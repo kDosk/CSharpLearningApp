@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\BackgroundKMPK.jpg" />
     <None Remove="Resources\cross-circle.png" />
     <None Remove="Resources\edit.png" />
     <None Remove="Resources\menu-burger.png" />
@@ -23,6 +24,9 @@
 
   <ItemGroup>
     <Folder Include="Classes\Exceptions\" />
+    <Folder Include="PageData\Page_5\" />
+    <Folder Include="PageData\Page_8\" />
+    <Folder Include="PageData\Page_11\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\BackgroundKMPK.jpg" />
     <Resource Include="Resources\cross-circle.png" />
     <Resource Include="Resources\edit.png" />
     <Resource Include="Resources\menu-burger.png" />

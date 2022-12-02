@@ -75,6 +75,9 @@ namespace CSharpLearningApp.Templates
 			MessageService.ShowMessage(TestCalculate.Calculate(_testList));
 			AuthorizationManager.CurrentUser.UserTestList.Single(p => p.TestList == _testList).IsPassed = true;
 			ApplicationContext.GetContext().SaveChanges();
+
+			InfoStorage.Information += $"{AuthorizationManager.CurrentUser.Surname} {AuthorizationManager.CurrentUser.Name} прошёл тестирование по {_testList.Subtitle.Title.Name}: {_testList.Subtitle.Name}. Оценка: \"{InfoStorage.Score}\"\n\n";
+
 			NavigationManager.MainFrame.GoBack();
 		}
 		#endregion

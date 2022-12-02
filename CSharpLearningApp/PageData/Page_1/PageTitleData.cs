@@ -4,7 +4,7 @@ using CSharpLearningApp.Models.PageModels.TestModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CSharpLearningApp.PageData.PageByKamilya
+namespace CSharpLearningApp.PageData.Page_1
 {
 	public class PageTitleData : PageDataBasic
 	{

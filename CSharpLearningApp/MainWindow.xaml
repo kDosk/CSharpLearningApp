@@ -111,11 +111,23 @@
                 </ScrollViewer>
             </Grid>
             <!--#endregion-->
-            
-            <Border Grid.Column="1" Margin="10" BorderThickness="3" BorderBrush="{StaticResource PrimaryColorBrush}" CornerRadius="20">
-                <TextBox x:Name="TBoxinfo" Background="Transparent" Foreground="#FF8FF3D7" FontSize="16" VerticalAlignment="Stretch" BorderThickness="0" IsReadOnly="True"/>
-            </Border>
-        </Grid>
+
+			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="5" MaxWidth="1200" Margin="20" CornerRadius="20" Grid.Column="1">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<Border Background="{StaticResource PrimaryColorBrush}" BorderThickness="0" CornerRadius="15 15 0 0">
+						<TextBlock Style="{StaticResource TextBlockH1}" Text="Информация" HorizontalAlignment="Center" Margin="0 10"/>
+					</Border>
+
+					<TextBox x:Name="TBoxinfo" Style="{StaticResource TextBoxPracticePage}" IsReadOnly="True" Margin="10" VerticalContentAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="18" Grid.Row="1"/>
+
+				</Grid>
+			</Border>
+		</Grid>
 
         <!--#region ModalWindow -->
         <modal:ModalWindowControl x:Name="AuthModalWindow" Grid.RowSpan="2">
