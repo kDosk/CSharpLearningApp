@@ -96,7 +96,7 @@ namespace CSharpLearningApp.PageData.Page_10
 					Subtitle_2("Глава 2. Сокращенная версия методов с результатом",
 							   theory_2,
 							   title),
-					Subtitle_2("Глава 3. Выход из метода",
+					Subtitle_3("Глава 3. Выход из метода",
 							   theory_3,
 							   title)
 				});
@@ -179,22 +179,19 @@ namespace CSharpLearningApp.PageData.Page_10
 													  "{\n" +
 													  "\tint a = 5;\n" +
 													  "\tint b = 0;\n" +
-													  "\tfor(int i = 0; i == a; i++);\n" +
-													  "\t{\n" +
-													  "\t\tb += i;\n" +
-													  "\t}\n" +
+													  "\tb = b + a;\n" +
 													  "\treturn b.toString();\n" +
 													  "}",
 													  new string[] { "Строка \"5\"", "Число 5", "Ошибка" },
 													  "Строка \"5\"",
 													  testList));
 			testList.TestQuestions.Add(CreateQuestion("Что будет возвращено при выполнении данного метода? \n" +
-													  "void GetValue()\n" +
+													  "string GetValue()\n" +
 													  "{\n" +
 													  "\tConsole.WriteLine(\"Hello World!\")\n" +
 													  "}",
 													  new string[] { "Строка \"Hello World!\"", "Ошибка", "Ничего" },
-													  "Ничего",
+													  "Ошибка",
 													  testList));
 
 			return testList;
@@ -209,8 +206,8 @@ namespace CSharpLearningApp.PageData.Page_10
 												      "{\n" +
 												      "\treturn \"Hello World!\";\n" +
 												      "}",
-													  new string[] { "void", "const", "if" },
-													  "const",
+													  new string[] { "string GetValue() => \"Hello World!\";", "string GetValue() => return \"Hello World!\";", "Никакая" },
+													  "string GetValue() => \"Hello World!\";",
 													  testList));
 			testList.TestQuestions.Add(CreateQuestion("Какая сокращенная версия данного метода?\n" +
 													  "int GetValue(int x, int y)\n" +
@@ -235,7 +232,7 @@ namespace CSharpLearningApp.PageData.Page_10
 													  "\n" +
 													  "GetValue();",
 													  new string[] { "Сумма \"x\" и \"y\"", "Строка \"x\" + \"y\"", "Ошибка" },
-													  "Ошибка",
+													  "Сумма \"x\" и \"y\"",
 													  testList));
 			testList.TestQuestions.Add(CreateQuestion("Что будет возвращено при выполнении данного метода? \n" +
 													  "int GetValue(int x, string y) => x + y;",

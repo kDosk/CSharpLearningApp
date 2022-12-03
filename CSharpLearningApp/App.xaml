@@ -89,6 +89,66 @@
 		</Style>
 		<!--#endregion-->
 
+		<!--#region User Instruction Button Style -->
+		<Style x:Key="UserInstructionButton" TargetType="Button" BasedOn="{StaticResource DefaultButton}">
+			<Setter Property="Margin" Value="15 0"/>
+			<Setter Property="Height" Value="40"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								VerticalAlignment="{TemplateBinding VerticalAlignment}"
+								HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+								Height="{TemplateBinding Height}"
+								Width="{TemplateBinding Width}">
+							<Border.Background>
+								<SolidColorBrush x:Name="borderBackground" Color="{StaticResource PrimaryColor}"/>
+							</Border.Background>
+							<ContentControl Margin="{TemplateBinding Padding}"
+											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											Content="{TemplateBinding Content}">
+								<ContentControl.Foreground>
+									<SolidColorBrush x:Name="ContentColor" Color="{StaticResource PrimaryFontColor}"/>
+								</ContentControl.Foreground>
+							</ContentControl>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup Name="CommonStates">
+									<VisualState Name="Normal"/>
+									<VisualState Name="MouseOver">
+										<Storyboard>
+											<ColorAnimation Storyboard.TargetName="ContentColor"
+															Storyboard.TargetProperty="Color" To="{StaticResource SecondaryFontColor}"
+															Duration="0:0:0.15"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="borderBackground"
+															Storyboard.TargetProperty="Opacity" To="0.9"
+															 Duration="0:0:0.1"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="borderBackground"
+															Storyboard.TargetProperty="Opacity" To="0.9"
+															 Duration="0:0:0.1"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<!--#endregion-->
+
 		<!--#region Rounded Button -->
 		<Style x:Key="RoundedButton" TargetType="Button" BasedOn="{StaticResource DefaultButton}">
 			<Setter Property="Template">
@@ -591,6 +651,16 @@
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
+		</Style>
+		<!--#endregion-->
+
+		<!--#region CheckBox Default -->
+		<Style x:Key="CheckBoxDefault" TargetType="CheckBox">
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Foreground" Value="{StaticResource PrimaryFontColorBrush}"/>
+			<Setter Property="Margin" Value="10"/>
 		</Style>
 		<!--#endregion-->
 

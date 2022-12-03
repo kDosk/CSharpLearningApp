@@ -1,0 +1,50 @@
+﻿<Window x:Class="CSharpLearningApp.Templates.UserInstructionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSharpLearningApp.Templates"
+        mc:Ignorable="d"
+        Title="UserInstructionWindow" MinHeight="450" MinWidth="800" Height="450" Width="800">
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+		<Grid Margin="0" Background="{StaticResource PrimaryColorBrush}">
+			<TextBlock Text="Руководство пользователя" Style="{StaticResource TextBlockH1}" HorizontalAlignment="Center" Margin="10"/>
+		</Grid>
+
+		<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+			<Border BorderBrush="{StaticResource SecondaryColorBrush}" BorderThickness="3" CornerRadius="20" MaxWidth="1000" Margin="20">
+				<Grid Margin="20">
+					<TextBlock x:Name="TBlockTheoryText" Style="{StaticResource TextBlockH1BlackFont}" FontSize="24" Text="Руководство пользователя."/>
+				</Grid>
+			</Border>
+		</ScrollViewer>
+
+		<Grid Margin="0" Grid.Row="2" Background="{StaticResource PrimaryColorBrush}">
+			<Grid MaxWidth="1000" Margin="20 0">
+				<CheckBox x:Name="CheckBoxInstuction" Content="Ознакомлен с руководством пользователя" Style="{StaticResource CheckBoxDefault}" HorizontalAlignment="Left" Margin="20 0"/>
+				<Button x:Name="ButtonGoBack" Click="ButtonGo_Click" Width="150" HorizontalAlignment="Right">
+					<TextBlock Text="Продолжить" Style="{StaticResource TextBlockH1WithAnimation}" VerticalAlignment="Center"/>
+					<Button.Style>
+						<Style TargetType="Button" BasedOn="{StaticResource UserInstructionButton}">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding ElementName=CheckBoxInstuction, Path=IsChecked}" Value="False">
+									<Setter Property="IsEnabled" Value="False"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding ElementName=CheckBoxInstuction, Path=IsChecked}" Value="True">
+									<Setter Property="IsEnabled" Value="True"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+			</Grid>
+		</Grid>
+
+	</Grid>
+</Window>

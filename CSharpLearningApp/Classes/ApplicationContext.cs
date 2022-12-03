@@ -37,7 +37,7 @@ namespace CSharpLearningApp.Classes
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlite("Data Source=testdb.db");
+			optionsBuilder.UseSqlite("Data Source=appdb.db");
 		}
 	}
 }

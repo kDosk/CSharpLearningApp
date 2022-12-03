@@ -1,4 +1,5 @@
 ﻿using CSharpLearningApp.Classes;
+using CSharpLearningApp.Templates;
 using System.Windows;
 
 namespace CSharpLearningApp
@@ -11,9 +12,17 @@ namespace CSharpLearningApp
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
-			ApplicationContext.GetContext();
 			MainWindow window = new MainWindow();
-			window.Show();
+			UserInstructionWindow instuction = new UserInstructionWindow();
+			if (instuction.ShowDialog() == true)
+			{
+				ApplicationContext.GetContext();
+				window.Show();
+			}
+			else
+			{
+				Current.Shutdown();
+			}
 		}
 	}
 }
