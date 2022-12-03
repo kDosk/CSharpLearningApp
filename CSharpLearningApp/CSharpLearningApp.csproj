@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Classes\Exceptions\" />
     <Folder Include="PageData\Page_5\" />
     <Folder Include="PageData\Page_8\" />
     <Folder Include="PageData\Page_11\" />

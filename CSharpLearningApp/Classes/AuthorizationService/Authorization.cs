@@ -1,19 +1,33 @@
-﻿using CSharpLearningApp.Models.UserModels;
+﻿using CSharpLearningApp.Classes.Exceptions;
+using CSharpLearningApp.Models.UserModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 
 namespace CSharpLearningApp.Classes.AuthorizationService
 {
 	internal class Authorization
 	{
-		public static User AddUser(string name, string surname, string login, string password)
+		public static void AddUser(string name, string surname, string login, string password, string confirmPassword)
 		{
-			try
+			if (!NotNullValidation(name, surname, login, password, confirmPassword))
 			{
-				if (!IsLoginBusy(login))
+				throw new ArgumentNullException();
+			}
+			else if (password != confirmPassword)
+			{
+				throw new PasswordsAreNotEqualsException(password, confirmPassword);
+			}
+			else if (IsLoginBusy(login))
+			{
+				throw new LoginIsExistException(login);
+			}
+			else
+			{
+				try
 				{
 					ApplicationContext.GetContext().Users.Add(new User
 					{
@@ -23,16 +37,13 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 						Password = HashingPassword(password),
 					});
 					ApplicationContext.GetContext().SaveChanges();
-					return GetUser(login, password);
+					AuthorizationManager.CurrentUser = GetUser(login, password);
 				}
-				else
+				catch (Exception)
 				{
-					return null;
+
+					throw new AuthorizationErrorException();
 				}
-			}
-			catch (Exception)
-			{
-				return null;
 			}
 		}
 
@@ -44,16 +55,35 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 
 		public static User GetUser(string login, string password)
 		{
-			try
+			if (!NotNullValidation(login, password))
 			{
-				var hashedPassword = HashingPassword(password);
-				var user = ApplicationContext.GetContext().Users.Where(p => p.Login == login && p.Password == hashedPassword).Include(p => p.UserTestList)
-																														   .Include(p => p.UserPracticeList);
-				return user.FirstOrDefault();
+				throw new ArgumentNullException();
 			}
-			catch (Exception)
+			else
 			{
-				return null;
+				User user;
+				try
+				{
+					user = ApplicationContext.GetContext().Users.Where(p => p.Login == login).Include(p => p.UserTestList)
+																										.Include(p => p.UserPracticeList).FirstOrDefault();
+				}
+				catch (Exception)
+				{
+					throw new AuthorizationErrorException();
+				}
+
+				if (user == null)
+				{
+					throw new UserNotFoundException(login, password);
+				}
+				else if (user.Password != HashingPassword(password))
+				{
+					throw new IncorrectPasswordException(password);
+				}
+				else
+				{
+					return user;
+				}
 			}
 		}
 
@@ -80,5 +110,19 @@ namespace CSharpLearningApp.Classes.AuthorizationService
 			}
 		}
 #pragma warning restore SYSLIB0021
+
+		private static bool NotNullValidation(params string[] strings)
+		{
+			bool result = true;
+			foreach (string s in strings)
+			{
+				if (string.IsNullOrWhiteSpace(s))
+				{
+					result = false;
+					break;
+				}
+			}
+			return result;
+		}
 	}
 }
