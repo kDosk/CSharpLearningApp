@@ -19,10 +19,7 @@ namespace CSharpLearningApp.PageData.Page_1
 				Practice practice = new Practice
 				{
 					Task = "Выполните следующий код:\n" +
-					"string GetValue()\n" +
-					"{\n" +
-					"\t return \"Hello world!\";\n" +
-					"}",
+					"string GetValue() => \"Hello world!\"\n",
 					CorrectAnswer = "Hello world!",
 					Title = title
 				};
