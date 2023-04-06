@@ -65,7 +65,8 @@ namespace CSharpLearningApp
 						ShowWindow(currentThemeTitle);
 						break;
 					case "Перечисления enum":
-						MessageService.ShowMessage("Данный элемент в разработке.");
+						new PageData.Page_11.PageTitleData().AddData(currentThemeTitle);
+						ShowWindow(currentThemeTitle);
 						break;
 					default:
 						MessageBox.Show("Ошибка выполнения.");

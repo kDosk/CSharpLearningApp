@@ -19,7 +19,18 @@ namespace CSharpLearningApp.PageData.Page_7
 				Title title = new Title { Name = titleName, TitleCreator = "Г. Лилия" }; // Create title
 
 				#region Create Practice
-				Practice practice = null;
+				Practice practice = new Practice
+				{
+					Task = "Выполните следующий код:\n" +
+					"int value = 0;\r\n" +
+					"for (int i = 0; i < 5; i++)\r\n" +
+					"{\r\n" +
+					"value += i;\r\n" +
+					"}\r\n" +
+					"value;\n",
+					CorrectAnswer = "10",
+					Title = title
+				};
 				#endregion
 
 				title.Practice = practice; // Add practice to title
@@ -131,7 +142,7 @@ namespace CSharpLearningApp.PageData.Page_7
 		{
 			Subtitle subtitle = AddSubtitle(name, theoryContent, title);
 
-			subtitle.TestList = null;
+			subtitle.TestList = TestList_3(subtitle);
 
 			return subtitle;
 		}
@@ -209,6 +220,34 @@ namespace CSharpLearningApp.PageData.Page_7
 			testList.TestQuestions.Add(CreateQuestion("Что сделать, чтобы не получить бесконечный цикл?",
 													  new string[] { "изменить название цикла", "изменить условие", "изменять параметр, проверяемый в условии" },
 													  "изменять параметр, проверяемый в условии",
+													  testList));
+
+			return testList;
+		}
+
+		private TestList TestList_3(Subtitle subtitle)
+		{
+			TestList testList = CreateTestList("Команды continue и break: Тест", subtitle);
+
+			testList.TestQuestions.Add(CreateQuestion("Операторы continue/break используется, когда нужно:",
+													  new string[] { "Выйти из цикла, из оператора выбора, из блока", "Присутствуют вложенные циклы", "Оба ответа верны" },
+													  "Выйти из цикла, из оператора выбора, из блока",
+													  testList));
+			testList.TestQuestions.Add(CreateQuestion("Оператор break применяется когда...",
+													  new string[] { "для прерывания вложенных циклов", "для прерывания текущей итерации", "для использования циклов for, foreach" },
+													  "для прерывания текущей итерации",
+													  testList));
+			testList.TestQuestions.Add(CreateQuestion("Оператор continue применяется когда..",
+													  new string[] { "нужно перейти к выполнению следующей итерации", "нужно перейти на оператор break", "оба ответа верны" },
+													  "нужно перейти к выполнению следующей итерации",
+													  testList));
+			testList.TestQuestions.Add(CreateQuestion("В чём отличие continue от break?",
+													  new string[] { "объединяет циклы", "выходит из цикла", "запускает новую итерацию цикла" },
+													  "запускает новую итерацию цикла",
+													  testList));
+			testList.TestQuestions.Add(CreateQuestion("Вложенные циклы-это циклы...",
+													  new string[] { "использующие операторы continue/break", "организованные в теле другого цикла", "циклы for, foreach, do...while, while" },
+													  "организованные в теле другого цикла",
 													  testList));
 
 			return testList;
